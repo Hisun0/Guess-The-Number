@@ -14,8 +14,6 @@ function guessingNumber() {
     arrayOfAttempts.push(inputValue);
 
     totalAttempts.textContent = `Your attempts: ${arrayOfAttempts.join(', ')}`;
-    
-    console.log(randomNumber)
 
     if (count === 10) {
         guess.textContent = 'Game over!';
