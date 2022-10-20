@@ -159,7 +159,8 @@ input::placeholder {
     font-weight: 700;
     font-size: 25px;
 
-    padding-left: 10px;
-    padding-top: 65px;
+    vertical-align: bottom;
     
+    padding-left: 10px;
+    padding-bottom: 10px;
 }
