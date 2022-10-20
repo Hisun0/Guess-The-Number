@@ -41,6 +41,7 @@ function guessingNumber() {
 button.addEventListener('click', guessingNumber);
 input.addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
+        
         e.preventDefault();
         button.click();
     }

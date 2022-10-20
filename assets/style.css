@@ -30,8 +30,8 @@ header {
 
     background-color: #e5e5e5;
     
-    border-bottom-left-radius: 50px;
-    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 2.5vw;
+    border-bottom-right-radius: 2.5vw;
 }
 
 header h1 {
@@ -40,7 +40,7 @@ header h1 {
     padding: 0;
     margin: 0;
 
-    font-size: 70px;
+    font-size: 4vw;
     color: #000000;
 }
 
@@ -49,11 +49,11 @@ header h1 {
     height: auto;
 
     margin: 0;
-    padding-left: 10px;
+    padding-left: 0.5vw;
 }
 
 .header-div p {
-    font-size: 24px;
+    font-size: 1.25vw;
     font-weight: 700;
 
     color: #000000;
@@ -63,9 +63,9 @@ header h1 {
 }
 
 div h1 {
-    padding-top: 100px;
+    padding-top: 10vh;
 
-    font-size: 45px;
+    font-size: 2.5vw;
     color: #000000;
 
     text-align: center;
@@ -82,55 +82,56 @@ div {
 
     margin-left: auto;
     margin-right: auto;
-    margin-top: 40px;
+    margin-top: 3vh;
 
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
+    border-top-left-radius: 2.5vw;
+    border-top-right-radius: 2.5vw;
 }
 
 input {
     display: block;
     
-    width: 250px;
-    height: 30px;
+    width: 15vw;
+    height: 3.5vh;
 
     border: #e5e5e5;
     
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
+    border-top-left-radius: 2vw;
+    border-top-right-radius: 2vw;
+    border-bottom-left-radius: 1vw;
+    border-bottom-right-radius: 1vw;
     
-    margin-top: 100px;
+    margin-top: 10vh;
     margin-left: auto;
     margin-right: auto;
 }
 
 input[type=text] {
-    padding-left: 12px;
-    padding-right: 12px;
-
     text-align: center;
+
+    font-size: 0.7vw;
 }
 
 button {
     display: block;
     
-    width: 150px;
-    height: 27px;
+    width: 8vw;
+    height: 3vh;
 
     margin-left: auto;
     margin-right: auto;
-    margin-top: 9px;
+    margin-top: 0.5vw;
 
     border: #e5e5e5;
     
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
+    border-bottom-left-radius: 2vw;
+    border-bottom-right-radius: 2vw;
+    border-top-left-radius: 0.5vw;
+    border-top-right-radius: 0.5vw;
 
     background-color: #b4aeac;
+
+    font-size: 0.7vw;
 }
 
 #restart {
@@ -150,17 +151,17 @@ input::placeholder {
 
     color: #000000;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 1.25vw;
 }
 
 .attempts {
     color: #000000;
 
     font-weight: 700;
-    font-size: 25px;
+    font-size: 1.25vw;
 
     vertical-align: bottom;
     
-    padding-left: 10px;
-    padding-bottom: 10px;
+    padding-left: 0.5vh;
+    padding-bottom: 0.5vh;
 }
