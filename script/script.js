@@ -11,28 +11,40 @@ const restartButton = document.getElementById('restart');
 
 function guessingNumber() {
     const inputValue = Number(input.value);
-    arrayOfAttempts.push(inputValue);
-
-    totalAttempts.textContent = `Your attempts: ${arrayOfAttempts.join(', ')}`;
-
-    if (count === 10) {
-        guess.textContent = 'Game over!';
-        gameOver();
-    } else if (inputValue < randomNumber) {
-        guess.textContent = 'Wrong! Try greater.';
-    } else if (inputValue > randomNumber) {
-        guess.textContent = 'Wrong! Try less.';
+    
+    if (isNaN(inputValue) === true) {
+        guess.textContent = 'Not a number!'
+        console.log('one')
     } else {
-        guess.textContent = 'You are absolutely right!';
-        win();
+        arrayOfAttempts.push(inputValue);
+        guess.textContent = '';
+    
+        totalAttempts.textContent = `Your attempts: ${arrayOfAttempts.join(', ')}`;
+        
+        if (count === 10) {
+            guess.textContent = 'Game over!';
+            gameOver();
+        } else if (inputValue < randomNumber) {
+            guess.textContent = 'Wrong! Try greater.';
+        } else if (inputValue > randomNumber) {
+            guess.textContent = 'Wrong! Try less.';
+        } else if (inputValue === randomNumber){
+            guess.textContent = 'You are absolutely right!';
+            win();
+        }
+
+        count++;
+        input.value = '';
     }
-
-
-    count++;
-    input.value = '';
 }
 
 button.addEventListener('click', guessingNumber);
+input.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        button.click();
+    }
+})
 
 function gameOver() {
     button.style.display = 'none';
@@ -64,6 +76,8 @@ function restartGame() {
 }
 
 restartButton.addEventListener('click', restartGame);
+
+
 
     
 
