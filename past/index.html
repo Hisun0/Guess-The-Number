@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link href="./assets/style.css" rel="stylesheet">
+        <title>Guess the number</title>
+    </head>
+    <header class="border">
+        <h1>Guess the number</h1>
+
+        <div class="header-div">
+            <p>This is a game about guessing numbers. You need to enter a number in the required field. The game will tell you if the number you are looking for is greater or less.</p>
+        </div>
+    </header>
+    
+    <body>
+        <div class="border game">
+            <h1>Try to guess number from 1 to 100</h1>
+            <h1>You have only 10 attempts</h1>
+            
+                <form>
+                    <input type="text" value name="guess" placeholder="Enter the number" autocomplete="off">
+                </form>           
+
+            <button id="btn">Press</button>
+            <button id="restart">Restart the game</button>
+
+            <p class="guesses"></p>
+            <p class="attempts"></p>
+        </div>
+
+        <script src="./script/script.js"></script>
+    </body>
+
+</html>

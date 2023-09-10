@@ -1,0 +1,71 @@
+@import url('./variables.css');
+
+@font-face {
+  font-family: 'Rimma-Sans-bold';
+  src: url('../fonts/RIMMA_SANS-BOLD_2.ttf');
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--main-bg);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 360px;
+  padding: 10px;
+}
+
+.first, .second, .third {
+  font-size: 48px;
+  animation: aniFirst 1500ms ease-in forwards;
+}
+
+.second {
+  opacity: 0;
+  animation-delay: 350ms;
+}
+
+.third {
+  opacity: 0;
+  animation-delay: 600ms;
+}
+
+@keyframes aniFirst {
+  0% {
+    opacity: 0;
+  }
+  
+  100% {
+    opacity: 1;
+  }
+}
+
+.logo-anim {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;  /* position the top  edge of the element at the middle of the parent */
+  left: 50%; /* position the left edge of the element at the middle of the parent */
+
+  transform: translate(-50%, -50%);
+}
+
+.color-blue {
+  color: var(--blue);
+}
+
+h1 {
+  font-family: 'Rimma-Sans-bold';
+  font-size: 36px;
+  text-align: center;
+  color: var(--white);
+  margin: 0;
+}
