@@ -1,11 +1,19 @@
 {
   "name": "guess-the-number",
   "version": "1.0.0",
+  "type": "module",
   "description": "game about guessing the numbers",
   "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Rodion",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "on-change": "^4.0.2"
+  },
+  "devDependencies": {
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  }
 }
