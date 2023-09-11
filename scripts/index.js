@@ -11,6 +11,7 @@ animation.addEventListener('animationend', () => {
 
     if (timePassed >= 300) {
       clearInterval(timer);
+      logo.style.transform = `translate(-50%, ${-390}px)`; // это нужно для точного попадания анимации в новый header
       return;
     }
 
@@ -18,7 +19,7 @@ animation.addEventListener('animationend', () => {
   });
 
   const draw = (timePassed) => {
-    logo.style.transform = `translate(-50%, ${Math.round(-(timePassed * 1.315))}px)`
+    logo.style.transform = `translate(-50%, ${Math.round(-(timePassed * 1.312))}px)`; // 1.312 - магическое число. оно просто самое ближайшее к -390px
   }
 
   logo.innerHTML = '';
