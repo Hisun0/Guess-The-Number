@@ -10,7 +10,7 @@ const renderSecondAnimation = () => {
 
     if (timePassed >= 300) {
       clearInterval(timer);
-      logo.style.transform = `translate(-50%, -48.7vh)`;
+      logo.style.transform = `translate(-50%, -38.7vh)`;
       return;
     }
 
