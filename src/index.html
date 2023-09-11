@@ -1,21 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./styles/style.css">
-  <title>Guess the number</title>
-</head>
-<body>
-  <header>
-    <div class="container">
-      <div class="logo-anim">
-        <h1 class="first">guess</h1>
-        <h1 class="second">the</h1>
-        <h1 class="third color-blue">number</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guess the number</title>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="logo-wrapper">
+          <div class="logo-anim">
+            <h1 class="first">guess</h1>
+            <h1 class="second">the</h1>
+            <h1 class="third color-blue">number</h1>
+          </div>
+        </div>
       </div>
-    </div>
-  </header>
-  <script type="module" src="./scripts/index.js"></script>
-</body>
+    </header>
+    <main>
+      <div class="container hidden">
+        <div class="wrapper menu center">
+          <div class="card">
+            <button class="btn-menu play"></button>
+            <h2>play</h2>
+          </div>
+          <div class="card">
+            <button class="btn-menu question"></button>
+            <h2>rules</h2>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="container secondary-bg hidden">
+        <div class="wrapper footer-menu center">
+          <div class="card">
+            <h3>made by <br />rodion</h3>
+            <div class="photo developer"></div>
+          </div>
+          <div class="card">
+            <h3>github</h3>
+            <div class="photo github"></div>
+          </div>
+          <div class="card">
+            <h3>telegram</h3>
+            <div class="photo telegram"></div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>
