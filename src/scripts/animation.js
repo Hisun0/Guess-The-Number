@@ -5,8 +5,10 @@ export default () => {
     animationEnd: false,
   };
 
-  const watchedState = onChange((state, { path, value }) => {
-    console.log(value)
+  const logo = document.querySelector('.logo-anim');
+  const container = document.querySelector('.container');
+
+  const watchedState = onChange(state, ({ path, value }) => {
     const start = Date.now();
 
     const timer = setInterval(() => {
@@ -22,6 +24,7 @@ export default () => {
     });
 
     const draw = (timePassed) => {
+      console.log(timePassed)
       logo.style.transform = `translate(-50%, ${Math.round(-(timePassed * 1.312))}px)`; // 1.312 - магическое число. оно просто самое ближайшее к -390px
     }
 
