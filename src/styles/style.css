@@ -122,6 +122,10 @@ footer {
   padding: 50px;
 }
 
+.relative {
+  position: relative;
+}
+
 .footer-menu {
   padding-right: 25px;
   padding-left: 25px;
