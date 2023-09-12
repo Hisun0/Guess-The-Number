@@ -77,13 +77,25 @@ const renderThirdAnimation = () => {
   header.classList.add('relative');
 };
 
+const renderContainer = (value, previousValue) => {
+  const currentContainer = document.querySelector(
+    `[data-active-target="${value}"]`
+  );
+  console.log(currentContainer);
+  currentContainer.classList.add('active');
+  const previousContainer = document.querySelector(
+    `[data-active-target="${previousValue}"]`
+  );
+  previousContainer.classList.remove('active');
+};
+
 export default () => {
   const state = {
     animation: 'first',
     uiState: 'menu',
   };
 
-  const watchedState = onChange(state, () => {
+  const watchedState = onChange(state, (path, value, previousValue) => {
     if (state.animation === 'second') {
       renderSecondAnimation();
     }
@@ -91,10 +103,10 @@ export default () => {
       setTimeout(renderThirdAnimation, 1000);
     }
     if (state.uiState === 'question') {
-      renderRulesBlock();
+      renderContainer(value, previousValue);
     }
     if (state.uiState === 'play') {
-      renderGameBlock();
+      renderContainer(value, previousValue);
     }
   });
 
@@ -108,6 +120,7 @@ export default () => {
   menuButtons.forEach((menuButton) => {
     menuButton.addEventListener('click', (event) => {
       event.preventDefault();
+      console.log('clicked');
       const buttonName = event.target.dataset.button;
       watchedState.uiState = buttonName;
     });

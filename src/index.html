@@ -17,9 +17,9 @@
         </div>
       </div>
     </header>
-    <main>
-      <div class="container hidden">
-        <div class="wrapper menu center">
+    <main class="hidden">
+      <div class="container active" data-active-target="menu">
+        <div class="wrapper main-menu">
           <div class="card">
             <button class="btn-menu play" data-button="play"></button>
             <h2>play</h2>
@@ -30,10 +30,36 @@
           </div>
         </div>
       </div>
+      <div class="container" data-active-target="question">
+        <div class="rules-card">
+          <div class="card-header">
+            <button class="btn-menu back"></button>
+            <h2>rules</h2>
+          </div>
+          <div class="card-content">
+            <div>
+              <p>This is a game about guessing numbers.</p>
+              <br />
+              <p>
+                You need to enter a number in the required field. The game will
+                tell you if the number you are looking for is greater or less.
+              </p>
+              <br />
+              <p>
+                if you will win 5 times in a row, you will get a secret game
+              </p>
+            </div>
+            <div class="card">
+              <h2 class="mg-5">gl hf</h2>
+              <div class="heart-img"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
     <footer>
       <div class="container secondary-bg hidden">
-        <div class="wrapper footer-menu center">
+        <div class="wrapper footer-menu">
           <div class="card">
             <h3>made by <br />rodion</h3>
             <div class="photo developer"></div>
