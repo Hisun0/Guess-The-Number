@@ -77,12 +77,26 @@ const renderThirdAnimation = () => {
   header.classList.add('relative');
 };
 
-const renderContainer = (value, previousValue) => {
+const renderContainer = (value, previousValue, state) => {
+  console.log(state.uiState);
+  if (value === true) {
+    const currentContainer = document.querySelector(
+      `[data-active-target="${state.uiState}"]`
+    );
+    currentContainer.classList.remove('active');
+
+    const previousContainer = document.querySelector(
+      `[data-active-target="menu"]`
+    );
+    previousContainer.classList.add('active');
+    return;
+  }
+
   const currentContainer = document.querySelector(
     `[data-active-target="${value}"]`
   );
-  console.log(currentContainer);
   currentContainer.classList.add('active');
+
   const previousContainer = document.querySelector(
     `[data-active-target="${previousValue}"]`
   );
@@ -93,6 +107,7 @@ export default () => {
   const state = {
     animation: 'first',
     uiState: 'menu',
+    backButtonClicked: false,
   };
 
   const watchedState = onChange(state, (path, value, previousValue) => {
@@ -103,10 +118,13 @@ export default () => {
       setTimeout(renderThirdAnimation, 1000);
     }
     if (state.uiState === 'question') {
-      renderContainer(value, previousValue);
+      renderContainer(value, previousValue, state);
     }
     if (state.uiState === 'play') {
-      renderContainer(value, previousValue);
+      renderContainer(value, previousValue, state);
+    }
+    if (state.backButtonClicked === true) {
+      renderContainer(value, previousValue, state);
     }
   });
 
@@ -121,8 +139,19 @@ export default () => {
     menuButton.addEventListener('click', (event) => {
       event.preventDefault();
       console.log('clicked');
+      console.log(state);
       const buttonName = event.target.dataset.button;
       watchedState.uiState = buttonName;
+    });
+  });
+
+  const backButtons = document.querySelectorAll('.btn-back');
+  backButtons.forEach((backButton) => {
+    backButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      watchedState.backButtonClicked = true;
+      watchedState.uiState = 'menu';
+      watchedState.backButtonClicked = false;
     });
   });
 };

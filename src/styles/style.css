@@ -25,6 +25,10 @@ main {
   min-height: 72vh;
 }
 
+input {
+  font-family: 'Rimma-Sans-bold';
+}
+
 .container {
   position: absolute;
   left: 0;
@@ -163,6 +167,18 @@ main > div {
   background-image: url('../images/question-button.svg');
 }
 
+.btn-back {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 5px;
+  background-position: center;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
+  background-image: url('../images/back.svg');
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -177,8 +193,58 @@ main > div {
   border-radius: 50px;
 }
 
+.rules-card + .rules-card {
+  margin-bottom: 10px;
+}
+
+.game {
+  height: 45%;
+}
+
+#input {
+  width: 100%;
+  height: 20%;
+  border-radius: 20px;
+  text-align: center;
+  border: none;
+}
+
+#submit {
+  width: 30%;
+  height: 20%;
+  background-color: var(--blue);
+  color: var(--white);
+  border-radius: 20px;
+  border: none;
+}
+
+.game-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.border-bottom {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.border-top {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
 .card-header {
-  padding: 10px;
+  padding: 10px 20px;
   border-bottom: 2px solid var(--main-bg);
 }
 
