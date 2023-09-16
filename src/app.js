@@ -78,10 +78,9 @@ const renderThirdAnimation = () => {
 };
 
 const renderContainer = (value, previousValue, state) => {
-  console.log(state.uiState);
   if (value === true) {
     const currentContainer = document.querySelector(
-      `[data-active-target="${state.uiState}"]`
+      `[data-active-target="${state.uiState.display}"]`
     );
     currentContainer.classList.remove('active');
 
@@ -105,43 +104,47 @@ const renderContainer = (value, previousValue, state) => {
 
 export default () => {
   const state = {
-    animation: 'first',
-    uiState: 'menu',
-    backButtonClicked: false,
+    uiState: {
+      animation: 'first',
+      display: 'menu',
+      backButtonClicked: false,
+    },
+    game: {
+      count: 0,
+      process: 'play',
+    },
   };
 
   const watchedState = onChange(state, (path, value, previousValue) => {
-    if (state.animation === 'second') {
+    if (state.uiState.animation === 'second') {
       renderSecondAnimation();
     }
-    if (state.animation === 'third') {
+    if (state.uiState.animation === 'third') {
       setTimeout(renderThirdAnimation, 1000);
     }
-    if (state.uiState === 'question') {
+    if (state.uiState.display === 'question') {
       renderContainer(value, previousValue, state);
     }
-    if (state.uiState === 'play') {
+    if (state.uiState.display === 'play') {
       renderContainer(value, previousValue, state);
     }
-    if (state.backButtonClicked === true) {
+    if (state.uiState.backButtonClicked === true) {
       renderContainer(value, previousValue, state);
     }
   });
 
   const animation = document.querySelector('.third');
   animation.addEventListener('animationend', () => {
-    watchedState.animation = 'second';
-    watchedState.animation = 'third';
+    watchedState.uiState.animation = 'second';
+    watchedState.uiState.animation = 'third';
   });
 
   const menuButtons = document.querySelectorAll('.btn-menu');
   menuButtons.forEach((menuButton) => {
     menuButton.addEventListener('click', (event) => {
       event.preventDefault();
-      console.log('clicked');
-      console.log(state);
       const buttonName = event.target.dataset.button;
-      watchedState.uiState = buttonName;
+      watchedState.uiState.display = buttonName;
     });
   });
 
@@ -149,9 +152,9 @@ export default () => {
   backButtons.forEach((backButton) => {
     backButton.addEventListener('click', (event) => {
       event.preventDefault();
-      watchedState.backButtonClicked = true;
-      watchedState.uiState = 'menu';
-      watchedState.backButtonClicked = false;
+      watchedState.uiState.backButtonClicked = true;
+      watchedState.uiState.display = 'menu';
+      watchedState.uiState.backButtonClicked = false;
     });
   });
 };
