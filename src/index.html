@@ -33,7 +33,7 @@
       <div class="container" data-active-target="question">
         <div class="rules-card">
           <div class="card-header relative">
-            <button class="btn-back"></button>
+            <button class="btn-back" data-for="question"></button>
             <h2>rules</h2>
           </div>
           <div class="card-content">
@@ -60,11 +60,12 @@
         <div class="game-wrapper">
           <div class="rules-card game border-bottom">
             <div class="card-header relative">
-              <button class="btn-back"></button>
+              <button class="btn-back" data-for="play"></button>
               <h2>game</h2>
             </div>
-            <div class="card-content">
+            <div class="card-content height-75">
               <form class="form-wrapper">
+                <p class="mg-5 color-red">error</p>
                 <input
                   type="text"
                   name="name"
@@ -80,7 +81,7 @@
             <div class="card-header">
               <h2>attempts</h2>
             </div>
-            <div class="card-content"></div>
+            <div class="card-content height-75"></div>
           </div>
         </div>
       </div>
