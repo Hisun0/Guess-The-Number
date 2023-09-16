@@ -97,6 +97,16 @@ const renderError = (value) => {
   errorText.textContent = value;
 };
 
+const renderGameProcess = (value) => {
+  const errorText = document.querySelector('form > p');
+  if (errorText.classList.contains('active')) {
+    errorText.classList.remove('active');
+  }
+
+  const attemptsText = document.querySelector('.height-75 > p');
+  attemptsText.textContent = value.join(', ');
+};
+
 export default () => {
   const state = {
     uiState: {
@@ -105,9 +115,8 @@ export default () => {
       backButtonFor: 'menu',
     },
     game: {
-      count: 0,
       win: false,
-      userGuess: '',
+      userGuesses: [],
       guessValidationError: '',
     },
   };
@@ -136,6 +145,8 @@ export default () => {
   const watchedGameState = onChange(state, (path, value) => {
     if (state.game.guessValidationError !== '') {
       renderError(value);
+    } else {
+      renderGameProcess(value);
     }
   });
 
@@ -166,6 +177,7 @@ export default () => {
   let randomNumber = getRandomNumber(1, 100);
 
   const form = document.querySelector('form');
+  const input = document.querySelector('#input');
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -174,11 +186,15 @@ export default () => {
     const validationResult = validateUserGuess(userGuess);
     if (validationResult.length !== 0) {
       watchedGameState.game.guessValidationError = validationResult[0];
+      state.game.guessValidationError = '';
+      input.value = '';
     } else {
       if (Number(userGuess) === randomNumber) {
         watchedGameState.game.win = true;
+        randomNumber = getRandomNumber(1, 100);
       } else {
-        watchedGameState.game.userGuess = userGuess;
+        watchedGameState.game.userGuesses.push(userGuess);
+        input.value = '';
       }
     }
   });
