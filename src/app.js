@@ -1,4 +1,6 @@
 import onChange from 'on-change';
+import validateUserGuess from './scripts/validator.js';
+import getRandomNumber from './scripts/random-number.js';
 
 const renderSecondAnimation = () => {
   const logo = document.querySelector('.logo-anim');
@@ -77,20 +79,7 @@ const renderThirdAnimation = () => {
   header.classList.add('relative');
 };
 
-const renderContainer = (value, previousValue, state) => {
-  if (value === true) {
-    const currentContainer = document.querySelector(
-      `[data-active-target="${state.uiState.display}"]`
-    );
-    currentContainer.classList.remove('active');
-
-    const previousContainer = document.querySelector(
-      `[data-active-target="menu"]`
-    );
-    previousContainer.classList.add('active');
-    return;
-  }
-
+const renderContainer = (value, previousValue) => {
   const currentContainer = document.querySelector(
     `[data-active-target="${value}"]`
   );
@@ -102,41 +91,59 @@ const renderContainer = (value, previousValue, state) => {
   previousContainer.classList.remove('active');
 };
 
+const renderError = (value) => {
+  const errorText = document.querySelector('form > p');
+  errorText.classList.add('active');
+  errorText.textContent = value;
+};
+
 export default () => {
   const state = {
     uiState: {
       animation: 'first',
       display: 'menu',
-      backButtonClicked: false,
+      backButtonFor: 'menu',
     },
     game: {
       count: 0,
-      process: 'play',
+      win: false,
+      userGuess: '',
+      guessValidationError: '',
     },
   };
 
-  const watchedState = onChange(state, (path, value, previousValue) => {
+  const watchedAnimationState = onChange(state, () => {
     if (state.uiState.animation === 'second') {
       renderSecondAnimation();
     }
     if (state.uiState.animation === 'third') {
       setTimeout(renderThirdAnimation, 1000);
     }
+  });
+
+  const watchedUiState = onChange(state, (path, value, previousValue) => {
     if (state.uiState.display === 'question') {
-      renderContainer(value, previousValue, state);
+      renderContainer(value, previousValue);
     }
     if (state.uiState.display === 'play') {
-      renderContainer(value, previousValue, state);
+      renderContainer(value, previousValue);
     }
-    if (state.uiState.backButtonClicked === true) {
-      renderContainer(value, previousValue, state);
+    if (state.uiState.display === 'menu') {
+      renderContainer(value, previousValue);
+    }
+  });
+
+  const watchedGameState = onChange(state, (path, value) => {
+    if (state.game.guessValidationError !== '') {
+      renderError(value);
     }
   });
 
   const animation = document.querySelector('.third');
   animation.addEventListener('animationend', () => {
-    watchedState.uiState.animation = 'second';
-    watchedState.uiState.animation = 'third';
+    watchedAnimationState.uiState.animation = 'second';
+    watchedAnimationState.uiState.animation = 'third';
+    state.uiState.animation = 'end';
   });
 
   const menuButtons = document.querySelectorAll('.btn-menu');
@@ -144,7 +151,7 @@ export default () => {
     menuButton.addEventListener('click', (event) => {
       event.preventDefault();
       const buttonName = event.target.dataset.button;
-      watchedState.uiState.display = buttonName;
+      watchedUiState.uiState.display = buttonName;
     });
   });
 
@@ -152,9 +159,27 @@ export default () => {
   backButtons.forEach((backButton) => {
     backButton.addEventListener('click', (event) => {
       event.preventDefault();
-      watchedState.uiState.backButtonClicked = true;
-      watchedState.uiState.display = 'menu';
-      watchedState.uiState.backButtonClicked = false;
+      watchedUiState.uiState.display = 'menu';
     });
+  });
+
+  let randomNumber = getRandomNumber(1, 100);
+
+  const form = document.querySelector('form');
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const userGuess = formData.get('name');
+
+    const validationResult = validateUserGuess(userGuess);
+    if (validationResult.length !== 0) {
+      watchedGameState.game.guessValidationError = validationResult[0];
+    } else {
+      if (Number(userGuess) === randomNumber) {
+        watchedGameState.game.win = true;
+      } else {
+        watchedGameState.game.userGuess = userGuess;
+      }
+    }
   });
 };
