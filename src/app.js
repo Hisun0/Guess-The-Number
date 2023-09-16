@@ -1,8 +1,8 @@
-import onChange from "on-change";
+import onChange from 'on-change';
 
 const renderSecondAnimation = () => {
-  const logo = document.querySelector(".logo-anim");
-  const container = document.querySelector(".container");
+  const logo = document.querySelector('.logo-anim');
+  const container = document.querySelector('.container');
   const start = Date.now();
 
   const timer = setInterval(() => {
@@ -23,32 +23,32 @@ const renderSecondAnimation = () => {
     )}vh)`;
   };
 
-  logo.innerHTML = "";
+  logo.innerHTML = '';
 
   const createH1 = () => {
-    const h1 = document.createElement("h1");
-    const textNode = document.createTextNode("Guess the ");
-    const span = document.createElement("span");
+    const h1 = document.createElement('h1');
+    const textNode = document.createTextNode('Guess the ');
+    const span = document.createElement('span');
 
-    span.textContent = "number";
-    span.classList.add("color-blue");
+    span.textContent = 'number';
+    span.classList.add('color-blue');
 
     h1.append(textNode, span);
     return h1;
   };
 
   logo.append(createH1());
-  logo.style.width = "300px";
+  logo.style.width = '300px';
 
   setTimeout(() => {
-    container.innerHTML = "";
+    container.innerHTML = '';
     container.append(createH1());
   }, 1000);
 };
 
 const renderThirdAnimation = () => {
   const start = Date.now();
-  const hiddenContainers = document.querySelectorAll(".hidden");
+  const hiddenContainers = document.querySelectorAll('.hidden');
 
   hiddenContainers.forEach((hiddenContainer) => {
     const timer = setInterval(() => {
@@ -56,7 +56,7 @@ const renderThirdAnimation = () => {
 
       if (timePassed >= 1000) {
         clearInterval(timer);
-        hiddenContainer.classList.remove("hidden");
+        hiddenContainer.classList.remove('hidden');
         return;
       }
 
@@ -69,28 +69,89 @@ const renderThirdAnimation = () => {
         hiddenContainer.style.opacity = `1`;
         return;
       }
-      hiddenContainer.style.opacity = `0.${Math.round(timePassed / 100)}`;
+      hiddenContainer.style.opacity = `0.${opacityValue}`;
     };
   });
+
+  const header = document.querySelector('header');
+  header.classList.add('relative');
+};
+
+const renderContainer = (value, previousValue, state) => {
+  console.log(state.uiState);
+  if (value === true) {
+    const currentContainer = document.querySelector(
+      `[data-active-target="${state.uiState}"]`
+    );
+    currentContainer.classList.remove('active');
+
+    const previousContainer = document.querySelector(
+      `[data-active-target="menu"]`
+    );
+    previousContainer.classList.add('active');
+    return;
+  }
+
+  const currentContainer = document.querySelector(
+    `[data-active-target="${value}"]`
+  );
+  currentContainer.classList.add('active');
+
+  const previousContainer = document.querySelector(
+    `[data-active-target="${previousValue}"]`
+  );
+  previousContainer.classList.remove('active');
 };
 
 export default () => {
   const state = {
-    animation: "first",
+    animation: 'first',
+    uiState: 'menu',
+    backButtonClicked: false,
   };
 
-  const watchedState = onChange(state, () => {
-    if (state.animation === "second") {
+  const watchedState = onChange(state, (path, value, previousValue) => {
+    if (state.animation === 'second') {
       renderSecondAnimation();
     }
-    if (state.animation === "third") {
+    if (state.animation === 'third') {
       setTimeout(renderThirdAnimation, 1000);
+    }
+    if (state.uiState === 'question') {
+      renderContainer(value, previousValue, state);
+    }
+    if (state.uiState === 'play') {
+      renderContainer(value, previousValue, state);
+    }
+    if (state.backButtonClicked === true) {
+      renderContainer(value, previousValue, state);
     }
   });
 
-  const animation = document.querySelector(".third");
-  animation.addEventListener("animationend", () => {
-    watchedState.animation = "second";
-    watchedState.animation = "third";
+  const animation = document.querySelector('.third');
+  animation.addEventListener('animationend', () => {
+    watchedState.animation = 'second';
+    watchedState.animation = 'third';
+  });
+
+  const menuButtons = document.querySelectorAll('.btn-menu');
+  menuButtons.forEach((menuButton) => {
+    menuButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      console.log('clicked');
+      console.log(state);
+      const buttonName = event.target.dataset.button;
+      watchedState.uiState = buttonName;
+    });
+  });
+
+  const backButtons = document.querySelectorAll('.btn-back');
+  backButtons.forEach((backButton) => {
+    backButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      watchedState.backButtonClicked = true;
+      watchedState.uiState = 'menu';
+      watchedState.backButtonClicked = false;
+    });
   });
 };
