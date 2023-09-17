@@ -80,6 +80,11 @@ const renderThirdAnimation = () => {
 };
 
 const renderContainer = (value, previousValue) => {
+  const h1 = document.querySelector('span');
+  if (h1.classList.contains('color-green')) {
+    h1.classList.replace('color-green', 'color-blue');
+  }
+
   const currentContainer = document.querySelector(
     `[data-active-target="${value}"]`
   );
@@ -97,17 +102,44 @@ const renderError = (value) => {
   errorText.textContent = value;
 };
 
+const renderGameProcess = (value) => {
+  const errorText = document.querySelector('form > p');
+  if (errorText.classList.contains('active')) {
+    errorText.classList.remove('active');
+  }
+
+  const attemptsText = document.querySelector('.height-75 > p');
+  attemptsText.textContent = value.join(', ');
+};
+
+const renderWin = () => {
+  const restartButton = document.querySelector('.wrapper > button');
+  restartButton.classList.add('active', 'bg-green');
+
+  const tryButton = document.querySelector('.wrapper > #submit');
+  tryButton.classList.remove('active');
+
+  const p = document.querySelector('form > p');
+  p.classList.replace('color-red', 'color-green');
+  p.classList.add('active');
+  p.textContent = 'you win';
+
+  const backButton = document.querySelector('[data-for="play"]');
+  backButton.classList.add('back-green');
+
+  const h1 = document.querySelector('span');
+  h1.classList.replace('color-blue', 'color-green');
+};
+
 export default () => {
   const state = {
     uiState: {
       animation: 'first',
       display: 'menu',
-      backButtonFor: 'menu',
     },
     game: {
-      count: 0,
-      win: false,
-      userGuess: '',
+      result: 'play',
+      userGuesses: [],
       guessValidationError: '',
     },
   };
@@ -127,6 +159,9 @@ export default () => {
     }
     if (state.uiState.display === 'play') {
       renderContainer(value, previousValue);
+      if (state.game.result === 'win') {
+        renderWin();
+      }
     }
     if (state.uiState.display === 'menu') {
       renderContainer(value, previousValue);
@@ -134,8 +169,19 @@ export default () => {
   });
 
   const watchedGameState = onChange(state, (path, value) => {
+    if (state.game.result === 'win') {
+      console.log('win');
+      renderWin();
+      //renderGameProcess();
+    }
+    if (state.game.result === 'lose') {
+      console.log('lose');
+    }
     if (state.game.guessValidationError !== '') {
       renderError(value);
+    }
+    if (state.game.result === 'play') {
+      renderGameProcess(value);
     }
   });
 
@@ -164,22 +210,30 @@ export default () => {
   });
 
   let randomNumber = getRandomNumber(1, 100);
+  console.log(randomNumber);
 
   const form = document.querySelector('form');
+  const input = document.querySelector('#input');
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const userGuess = formData.get('name');
 
     const validationResult = validateUserGuess(userGuess);
+
     if (validationResult.length !== 0) {
       watchedGameState.game.guessValidationError = validationResult[0];
+      state.game.guessValidationError = '';
+      input.value = '';
+    }
+    if (Number(userGuess) === randomNumber) {
+      watchedGameState.game.result = 'win';
+      randomNumber = getRandomNumber(1, 100);
+    } else if (state.game.userGuesses.length === 9) {
+      watchedGameState.game.result = 'lose';
     } else {
-      if (Number(userGuess) === randomNumber) {
-        watchedGameState.game.win = true;
-      } else {
-        watchedGameState.game.userGuess = userGuess;
-      }
+      watchedGameState.game.userGuesses.push(userGuess);
+      input.value = '';
     }
   });
 };
