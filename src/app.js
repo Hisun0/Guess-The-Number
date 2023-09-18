@@ -107,6 +107,8 @@ export default () => {
     if (state.game.form.showButton === 'restart') {
       const restartButton = document.querySelector('.wrapper > button');
       const resultColor = state.game.result === 'win' ? 'green' : 'red';
+      console.log(resultColor);
+      restartButton.classList = '';
       restartButton.classList.add('active', `bg-${resultColor}`);
 
       const tryButton = document.querySelector('.wrapper > #submit');
@@ -166,17 +168,17 @@ export default () => {
       const numberGuess = Number(userGuess);
       const isCorrectGuess = numberGuess === randomNumber;
 
-      if (isCorrectGuess || state.game.userGuesses.length === 10) {
-        watchedFormState.game.form.inputDisabled = true;
-        watchedFormState.game.form.showButton = 'restart';
-      }
-
       if (isCorrectGuess) {
         watchedGameState.game.result = 'win';
       } else if (state.game.userGuesses.length === 10) {
         watchedGameState.game.result = 'lose';
       } else {
         watchedTipState.game.isGuessLess = numberGuess < randomNumber;
+      }
+
+      if (isCorrectGuess || state.game.userGuesses.length === 10) {
+        watchedFormState.game.form.inputDisabled = true;
+        watchedFormState.game.form.showButton = 'restart';
       }
 
       state.game.isGuessLess = null;
