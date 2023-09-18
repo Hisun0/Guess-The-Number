@@ -100,15 +100,10 @@ export default () => {
     }
   });
 
-  const watchedFormState = onChange(state, (path, value) => {
-    if (state.game.form.inputDisabled === true) {
-      const input = document.querySelector('#input');
-      input.disabled = true;
-    }
-    if (state.game.form.inputDisabled === false) {
-      const input = document.querySelector('#input');
-      input.disabled = false;
-    }
+  const watchedFormState = onChange(state, () => {
+    const input = document.querySelector('#input');
+    input.disabled = state.game.form.inputDisabled;
+
     if (state.game.form.showButton === 'restart') {
       const restartButton = document.querySelector('.wrapper > button');
       const resultColor = state.game.result === 'win' ? 'green' : 'red';
@@ -171,14 +166,15 @@ export default () => {
       const numberGuess = Number(userGuess);
       const isCorrectGuess = numberGuess === randomNumber;
 
+      if (isCorrectGuess || state.game.userGuesses.length === 10) {
+        watchedFormState.game.form.inputDisabled = true;
+        watchedFormState.game.form.showButton = 'restart';
+      }
+
       if (isCorrectGuess) {
         watchedGameState.game.result = 'win';
-        watchedFormState.game.form.inputDisabled = true;
-        watchedFormState.game.form.showButton = 'restart';
       } else if (state.game.userGuesses.length === 10) {
         watchedGameState.game.result = 'lose';
-        watchedFormState.game.form.inputDisabled = true;
-        watchedFormState.game.form.showButton = 'restart';
       } else {
         watchedTipState.game.isGuessLess = numberGuess < randomNumber;
       }
