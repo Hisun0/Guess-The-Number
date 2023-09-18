@@ -1,135 +1,13 @@
 import onChange from 'on-change';
 import validateUserGuess from './scripts/validator.js';
 import getRandomNumber from './scripts/random-number.js';
-
-const renderSecondAnimation = () => {
-  const logo = document.querySelector('.logo-anim');
-  const container = document.querySelector('.container');
-  const start = Date.now();
-
-  const timer = setInterval(() => {
-    const timePassed = Date.now() - start;
-
-    if (timePassed >= 300) {
-      clearInterval(timer);
-      logo.style.transform = `translate(-50%, -38.7vh)`;
-      return;
-    }
-
-    draw(timePassed);
-  });
-
-  const draw = (timePassed) => {
-    logo.style.transform = `translate(-50%, ${Math.round(
-      -((timePassed * 1.3) / 10)
-    )}vh)`;
-  };
-
-  logo.innerHTML = '';
-
-  const createH1 = () => {
-    const h1 = document.createElement('h1');
-    const textNode = document.createTextNode('Guess the ');
-    const span = document.createElement('span');
-
-    span.textContent = 'number';
-    span.classList.add('color-blue');
-
-    h1.append(textNode, span);
-    return h1;
-  };
-
-  logo.append(createH1());
-  logo.style.width = '300px';
-
-  setTimeout(() => {
-    container.innerHTML = '';
-    container.append(createH1());
-  }, 1000);
-};
-
-const renderThirdAnimation = () => {
-  const start = Date.now();
-  const hiddenContainers = document.querySelectorAll('.hidden');
-
-  hiddenContainers.forEach((hiddenContainer) => {
-    const timer = setInterval(() => {
-      const timePassed = Date.now() - start;
-
-      if (timePassed >= 1000) {
-        clearInterval(timer);
-        hiddenContainer.classList.remove('hidden');
-        return;
-      }
-
-      draw(timePassed);
-    });
-
-    const draw = (timePassed) => {
-      const opacityValue = Math.round(timePassed / 100);
-      if (opacityValue === 10) {
-        hiddenContainer.style.opacity = `1`;
-        return;
-      }
-      hiddenContainer.style.opacity = `0.${opacityValue}`;
-    };
-  });
-
-  const header = document.querySelector('header');
-  header.classList.add('relative');
-};
-
-const renderContainer = (value, previousValue) => {
-  const h1 = document.querySelector('span');
-  if (h1.classList.contains('color-green')) {
-    h1.classList.replace('color-green', 'color-blue');
-  }
-
-  const currentContainer = document.querySelector(
-    `[data-active-target="${value}"]`
-  );
-  currentContainer.classList.add('active');
-
-  const previousContainer = document.querySelector(
-    `[data-active-target="${previousValue}"]`
-  );
-  previousContainer.classList.remove('active');
-};
-
-const renderError = (value) => {
-  const errorText = document.querySelector('form > p');
-  errorText.classList.add('active');
-  errorText.textContent = value;
-};
-
-const renderGameProcess = (value) => {
-  const errorText = document.querySelector('form > p');
-  if (errorText.classList.contains('active')) {
-    errorText.classList.remove('active');
-  }
-
-  const attemptsText = document.querySelector('.height-75 > p');
-  attemptsText.textContent = value.join(', ');
-};
-
-const renderWin = () => {
-  const restartButton = document.querySelector('.wrapper > button');
-  restartButton.classList.add('active', 'bg-green');
-
-  const tryButton = document.querySelector('.wrapper > #submit');
-  tryButton.classList.remove('active');
-
-  const p = document.querySelector('form > p');
-  p.classList.replace('color-red', 'color-green');
-  p.classList.add('active');
-  p.textContent = 'you win';
-
-  const backButton = document.querySelector('[data-for="play"]');
-  backButton.classList.add('back-green');
-
-  const h1 = document.querySelector('span');
-  h1.classList.replace('color-blue', 'color-green');
-};
+import {
+  renderContainer,
+  renderResult,
+  renderSecondAnimation,
+  renderThirdAnimation,
+  renderTip,
+} from './scripts/render.js';
 
 export default () => {
   const state = {
@@ -139,8 +17,13 @@ export default () => {
     },
     game: {
       result: 'play',
+      isGuessLess: null,
       userGuesses: [],
       guessValidationError: '',
+      form: {
+        inputDisabled: false,
+        showButton: 'try',
+      },
     },
   };
 
@@ -160,7 +43,9 @@ export default () => {
     if (state.uiState.display === 'play') {
       renderContainer(value, previousValue);
       if (state.game.result === 'win') {
-        renderWin();
+        renderResult('green');
+      } else if (state.game.result === 'lose') {
+        renderResult('red');
       }
     }
     if (state.uiState.display === 'menu') {
@@ -170,18 +55,74 @@ export default () => {
 
   const watchedGameState = onChange(state, (path, value) => {
     if (state.game.result === 'win') {
-      console.log('win');
-      renderWin();
-      //renderGameProcess();
+      renderResult('green');
     }
     if (state.game.result === 'lose') {
-      console.log('lose');
-    }
-    if (state.game.guessValidationError !== '') {
-      renderError(value);
+      renderResult('red');
     }
     if (state.game.result === 'play') {
-      renderGameProcess(value);
+      const attemptsText = document.querySelector('.height-75 > p');
+      attemptsText.textContent = value.join(', ');
+    }
+    if (state.game.result === 'restart') {
+      const h1 = document.querySelector('span');
+      h1.classList = '';
+      h1.classList.add('color-blue');
+
+      const p = document.querySelector('form > p');
+      p.classList.remove('active');
+
+      const backButton = document.querySelector('[data-for="play"]');
+      backButton.classList = '';
+      backButton.classList.add('btn-back', 'back-blue');
+
+      const attemptsText = document.querySelector('.height-75 > p');
+      attemptsText.textContent =
+        'this is where your attempts will be displayed';
+      state.game.result = 'play';
+    }
+  });
+
+  const watchedTipState = onChange(state, (path, value) => {
+    if (state.game.isGuessLess === false) {
+      renderTip('high');
+    } else {
+      renderTip('low');
+    }
+  });
+
+  const watchedErrorState = onChange(state, (path, value) => {
+    if (state.game.guessValidationError !== '') {
+      const errorText = document.querySelector('form > p');
+      errorText.classList = '';
+      errorText.classList.add('mg-5', 'color-red', 'active');
+      errorText.textContent = value;
+    }
+  });
+
+  const watchedFormState = onChange(state, (path, value) => {
+    if (state.game.form.inputDisabled === true) {
+      const input = document.querySelector('#input');
+      input.disabled = true;
+    }
+    if (state.game.form.inputDisabled === false) {
+      const input = document.querySelector('#input');
+      input.disabled = false;
+    }
+    if (state.game.form.showButton === 'restart') {
+      const restartButton = document.querySelector('.wrapper > button');
+      const resultColor = state.game.result === 'win' ? 'green' : 'red';
+      restartButton.classList.add('active', `bg-${resultColor}`);
+
+      const tryButton = document.querySelector('.wrapper > #submit');
+      tryButton.classList.remove('active');
+    }
+    if (state.game.form.showButton === 'try') {
+      const restartButton = document.querySelector('.wrapper > button');
+      restartButton.classList = '';
+
+      const tryButton = document.querySelector('.wrapper > #submit');
+      tryButton.classList.add('active');
     }
   });
 
@@ -222,18 +163,38 @@ export default () => {
     const validationResult = validateUserGuess(userGuess);
 
     if (validationResult.length !== 0) {
-      watchedGameState.game.guessValidationError = validationResult[0];
+      watchedErrorState.game.guessValidationError = validationResult[0];
       state.game.guessValidationError = '';
-      input.value = '';
-    }
-    if (Number(userGuess) === randomNumber) {
-      watchedGameState.game.result = 'win';
-      randomNumber = getRandomNumber(1, 100);
-    } else if (state.game.userGuesses.length === 9) {
-      watchedGameState.game.result = 'lose';
     } else {
       watchedGameState.game.userGuesses.push(userGuess);
       input.value = '';
+      const numberGuess = Number(userGuess);
+      const isCorrectGuess = numberGuess === randomNumber;
+
+      if (isCorrectGuess) {
+        watchedGameState.game.result = 'win';
+        watchedFormState.game.form.inputDisabled = true;
+        watchedFormState.game.form.showButton = 'restart';
+      } else if (state.game.userGuesses.length === 10) {
+        watchedGameState.game.result = 'lose';
+        watchedFormState.game.form.inputDisabled = true;
+        watchedFormState.game.form.showButton = 'restart';
+      } else {
+        watchedTipState.game.isGuessLess = numberGuess < randomNumber;
+      }
+
+      state.game.isGuessLess = null;
     }
+  });
+
+  const restartButton = document.querySelector('.width-60 > button');
+  restartButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    watchedGameState.game.result = 'restart';
+    watchedFormState.game.form.inputDisabled = false;
+    watchedFormState.game.form.showButton = 'try';
+    state.game.userGuesses.length = 0;
+    randomNumber = getRandomNumber(1, 100);
+    console.log(randomNumber);
   });
 };

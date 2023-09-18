@@ -27,7 +27,7 @@ main {
 
 input {
   font-family: 'Rimma-Sans-bold';
-  font-size: 8px;
+  font-size: 12px;
 }
 
 .container {
@@ -186,11 +186,18 @@ form > p {
   background-size: cover;
   background-color: transparent;
   border: none;
-  background-image: url('../images/back.svg');
 }
 
 .back-green {
   background-image: url('../images/back-green.svg');
+}
+
+.back-red {
+  background-image: url('../images/back-red.svg');
+}
+
+.back-blue {
+  background-image: url('../images/back.svg');
 }
 
 .card {
@@ -334,6 +341,14 @@ form > p {
   color: var(--green);
 }
 
+.color-yellow {
+  color: var(--yellow);
+}
+
 .bg-green {
   background-color: var(--green);
+}
+
+.bg-red {
+  background-color: var(--red);
 }
