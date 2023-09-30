@@ -3,26 +3,11 @@
 @import '../../node_modules/bootstrap/scss/bootstrap';
 @import './theme';
 
-$theme-colors: (
-  'bg-main': (
-    'light': '#ffffff',
-    'dark': '#24292f',
-  ),
-  'bg-secondary': (
-    'light': '#75C2FF',
-    'dark': '#393E43',
-  ),
-  'color-blue': (
-    'light': '#75C2FF',
-    'dark': '#00aaff',
-  ),
-  'accent-color': (
-    'light': '#266EA6',
-    'dark': '#00aaff',
-  ),
-);
+@mixin path-to-photo($path) {
+  background-image: url(#{$path});
+}
 
-$color-blue: string.unquote(map.get($theme-colors, 'color-blue', 'dark'));
+$color-blue: #00aaff;
 
 * {
   margin: 0;
@@ -46,15 +31,22 @@ main {
   flex: 1 1 auto;
 }
 
-footer {
-  flex: 0.25;
-}
-
 h1,
 h2,
 h3,
 h4 {
   font-family: Rimma-Sans;
+}
+
+p {
+  font-family: Rimma-Sans;
+  margin: 0;
+}
+
+a {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .wrapper {
@@ -76,6 +68,23 @@ h4 {
 .btn {
   font-family: Rimma-Sans;
   width: 50%;
+}
+
+.photo {
+  width: 64px;
+  height: 64px;
+  background-position: center;
+  background-size: cover;
+}
+
+.developer {
+  @include path-to-photo('../images/my-foto.png');
+}
+.telegram {
+  @include path-to-photo('../images/telegram.svg');
+}
+.github {
+  @include path-to-photo('../images/github.svg');
 }
 
 [data-bs-theme='light'] h1 {

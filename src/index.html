@@ -5,25 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Guess The Number</title>
 </head>
-<body theme="dark" data-bs-theme="dark">
+<body data-bs-theme="dark">
   <div class="wrapper" id="app">
-    <header class="mb-3">
+    <header>
       <div class="row">
         <div class="col text-center px-5">
           <h1 class="text-white">guess the <span class="header-color">number</span></h1>
         </div>
       </div>
     </header>
-    <main class="mb-3">
+    <main class="d-flex flex-row align-items-center mb-3">
       <div class="container">
         <div class="row">
           <div class="col">
             <div class="card bg-secondary text-white rounded-4">
               <div class="card-header text-center"><h2 class="h4">menu</h2></div>
               <div class="card-body text-center">
-                <button class="btn btn-primary mb-3">play</button>
-                <button class="btn btn-primary mb-3">rules</button>
-                <button class="btn btn-primary mb-3">settings</button>
+                <button class="btn btn-primary mb-3" data-bs-target="play">play</button>
+                <button class="btn btn-primary mb-3" data-bs-target="rules">rules</button>
+                <button class="btn btn-primary mb-3" data-bs-target="settings">settings</button>
+                <input type="checkbox" name="theme" id="theme">Switch theme</input>
               </div>
             </div>
           </div>
@@ -31,7 +32,24 @@
       </div>
     </main>
     <footer class="bg-secondary">
-      <input type="checkbox" name="theme" id="theme">Switch theme</input>
+      <div class="container">
+        <div class="row flex-row align-items-center">
+          <div class="col d-flex flex-column align-items-center">
+            <div class="photo developer"></div>
+            <p class="text-center">made by <br />rodion</p>
+          </div>
+          <div class="col d-flex flex-column align-items-center justify-content-between">
+            <div class="photo github">
+              <a href="https://github.com/Hisun0/Guess-The-Number"></a>
+            </div>
+            <p>github</p>
+          </div>
+          <div class="col d-flex flex-column align-items-center justify-content-between">
+            <div class="photo telegram"><a href="https://t.me/d1vaaan"></a></div>
+            <p>telegram</p>
+          </div>
+        </div>
+      </div>
     </footer>
   </div>
 </body>
