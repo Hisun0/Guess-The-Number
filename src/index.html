@@ -1,115 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Guess the number</title>
-  </head>
-  <body>
-    <header>
-      <div class="container">
-        <div class="logo-wrapper">
-          <div class="logo-anim">
-            <h1 class="first">guess</h1>
-            <h1 class="second">the</h1>
-            <h1 class="third color-blue">number</h1>
-          </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guess The Number</title>
+</head>
+<body theme="dark" data-bs-theme="dark">
+  <div class="wrapper" id="app">
+    <header class="mb-3">
+      <div class="row">
+        <div class="col text-center px-5">
+          <h1 class="text-white">guess the <span class="header-color">number</span></h1>
         </div>
       </div>
     </header>
-    <main class="hidden">
-      <div class="container active" data-active-target="menu">
-        <div class="wrapper main-menu">
-          <div class="card">
-            <button class="btn-menu play" data-button="play"></button>
-            <h2>play</h2>
-          </div>
-          <div class="card">
-            <button class="btn-menu question" data-button="question"></button>
-            <h2>rules</h2>
-          </div>
-        </div>
-      </div>
-      <div class="container" data-active-target="question">
-        <div class="rules-card">
-          <div class="card-header relative">
-            <button class="btn-back back-blue" data-for="question"></button>
-            <h2>rules</h2>
-          </div>
-          <div class="card-content">
-            <div>
-              <p>This is a game about guessing numbers.</p>
-              <br />
-              <p>
-                You need to enter a number in the required field. The game will
-                tell you if the number you are looking for is greater or less.
-              </p>
-              <br />
-              <p>
-                if you will win 5 times in a row, you will get a secret game
-              </p>
-            </div>
-            <div class="card">
-              <h2 class="mg-5">gl hf</h2>
-              <div class="heart-img"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="container" data-active-target="play">
-        <div class="game-wrapper">
-          <div class="rules-card game border-bottom">
-            <div class="card-header relative">
-              <button class="btn-back back-blue" data-for="play"></button>
-              <h2>game</h2>
-            </div>
-            <div class="card-content height-75">
-              <form class="form-wrapper">
-                <p class="mg-5 color-red">error</p>
-                <input
-                  type="text"
-                  name="name"
-                  class="mg-5"
-                  id="input"
-                  placeholder="enter the number"
-                />
-                <div class="wrapper width-60">
-                  <input class="active" type="submit" value="try" id="submit" />
-                  <button id="submit">restart</button>
-                </div>
-              </form>
-            </div>
-          </div>
-          <div class="rules-card game border-top">
-            <div class="card-header">
-              <h2>attempts</h2>
-            </div>
-            <div class="card-content height-75">
-              <p>this is where your attempts will be displayed</p>
+    <main class="mb-3">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="card bg-secondary text-white rounded-4">
+              <div class="card-header text-center"><h2 class="h4">menu</h2></div>
+              <div class="card-body text-center">
+                <button class="btn btn-primary mb-3">play</button>
+                <button class="btn btn-primary mb-3">rules</button>
+                <button class="btn btn-primary mb-3">settings</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </main>
-    <footer>
-      <div class="container secondary-bg hidden">
-        <div class="wrapper footer-menu">
-          <div class="card">
-            <h3>made by <br />rodion</h3>
-            <div class="photo developer"></div>
-          </div>
-          <div class="card">
-            <h3>github</h3>
-            <div class="photo github">
-              <a href="https://github.com/Hisun0/Guess-The-Number"></a>
-            </div>
-          </div>
-          <div class="card">
-            <h3>telegram</h3>
-            <div class="photo telegram"><a href="http://t.me/d1vaaan"></a></div>
-          </div>
-        </div>
-      </div>
+    <footer class="bg-secondary">
+      <input type="checkbox" name="theme" id="theme">Switch theme</input>
     </footer>
-  </body>
+  </div>
+</body>
 </html>
