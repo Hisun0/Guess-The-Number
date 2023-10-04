@@ -1,21 +1,29 @@
-export const renderContainer = (value, previousValue) => {
-  const h1 = document.querySelector('span');
-  if (h1.classList.contains('color-green')) {
-    h1.classList.replace('color-green', 'color-blue');
-  }
-  if (h1.classList.contains('color-red')) {
-    h1.classList.replace('color-red', 'color-blue');
-  }
+import { gsap } from 'gsap';
 
-  const currentContainer = document.querySelector(
-    `[data-active-target="${value}"]`
-  );
-  currentContainer.classList.add('active');
+export const renderContainer = (value, previousValue) => {
+  const tl = gsap.timeline();
+  const tl2 = gsap.timeline();
 
   const previousContainer = document.querySelector(
-    `[data-active-target="${previousValue}"]`
+    `[data-container-name="${previousValue}"]`
   );
-  previousContainer.classList.remove('active');
+
+  tl.from(previousContainer, { rotateY: 10, rotateX: 10, duration: 0.2 })
+    .to(previousContainer, { opacity: 0, duration: 0.3 })
+    .eventCallback('onComplete', () =>
+      previousContainer.classList.remove('active')
+    );
+
+  const currentContainer = document.querySelector(
+    `[data-container-name="${value}"]`
+  );
+
+  tl2
+    .from(currentContainer, { rotateY: 10, rotateX: 10, duration: 0.2 })
+    .to(currentContainer, { opacity: 1, duration: 0.3 })
+    .eventCallback('onComplete', () =>
+      currentContainer.classList.add('active')
+    );
 };
 
 export const renderResult = (resultColor) => {
