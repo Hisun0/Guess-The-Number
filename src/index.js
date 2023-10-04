@@ -1,5 +1,6 @@
 import app from './app.js';
 import './styles/style.scss';
+import 'bootstrap';
 import './index.html';
 import { gsap } from 'gsap';
 
@@ -42,11 +43,11 @@ tl.eventCallback('onComplete', () =>
   document.querySelector('.translate-middle-custom').remove()
 );
 
-const checkbox = document.querySelector('#theme');
-checkbox.addEventListener('change', () => {
-  if (document.body.dataset.bsTheme === 'dark') {
-    document.body.dataset.bsTheme = 'light';
-  } else {
-    document.body.dataset.bsTheme = 'dark';
-  }
+const buttons = document.querySelectorAll('[data-toggle-theme]');
+buttons.forEach((button) => {
+  button.addEventListener('click', (event) => {
+    event.preventDefault();
+    const theme = button.dataset.toggleTheme;
+    document.body.dataset.bsTheme = theme;
+  });
 });
