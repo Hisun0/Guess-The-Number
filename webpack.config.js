@@ -12,10 +12,15 @@ export default {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    assetModuleFilename: 'images/[hash][ext][query]',
   },
 
   module: {
     rules: [
+      {
+        test: /\.html$/,
+        use: 'html-loader',
+      },
       {
         test: /\.(c|sa|sc)ss$/,
         use: ['style-loader', 'css-loader', 'sass-loader'],

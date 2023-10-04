@@ -3,10 +3,6 @@
 @import '../../node_modules/bootstrap/scss/bootstrap';
 @import './theme';
 
-@mixin path-to-photo($path) {
-  background-image: url(#{$path});
-}
-
 $color-blue: #00aaff;
 
 * {
@@ -18,6 +14,11 @@ $color-blue: #00aaff;
 @font-face {
   font-family: Rimma-Sans;
   src: url('../fonts/RIMMA_SANS-BOLD_2.ttf');
+}
+
+@font-face {
+  font-family: Mulish;
+  src: url('../fonts/Mulish-Medium.ttf');
 }
 
 html,
@@ -36,18 +37,13 @@ h2,
 h3,
 h4 {
   font-family: Rimma-Sans;
-}
-
-p {
-  font-family: Rimma-Sans;
-  font-size: 12px;
   margin: 0;
 }
 
-a {
-  display: block;
-  width: 100%;
-  height: 100%;
+p {
+  font-family: Mulish;
+  font-size: 14px;
+  margin: 0;
 }
 
 .wrapper {
@@ -72,6 +68,11 @@ a {
   width: 50%;
 }
 
+.h6 {
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+}
+
 .photo {
   width: 48px;
   height: 48px;
@@ -79,14 +80,21 @@ a {
   background-size: cover;
 }
 
-.developer {
-  @include path-to-photo('../images/my-foto.png');
+.btn-back {
+  width: 40px;
+  height: 40px;
+  background-position: center;
+  background-size: cover;
+  background-color: transparent;
+  border: none;
 }
-.telegram {
-  @include path-to-photo('../images/telegram.svg');
+
+#button-back {
+  fill: var(--bs-primary);
 }
-.github {
-  @include path-to-photo('../images/github.svg');
+
+#heart-icon {
+  fill: var(--bs-primary);
 }
 
 .translate-middle-custom {

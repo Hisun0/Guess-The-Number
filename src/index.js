@@ -1,5 +1,6 @@
 import app from './app.js';
 import './styles/style.scss';
+import './index.html';
 import { gsap } from 'gsap';
 
 const header = document.querySelector('header');
@@ -34,11 +35,11 @@ tl.to('.move-element', {
   y: headerPosition - bottom,
 });
 
-tl.to('.position-absolute', { opacity: 0 });
+tl.to('.translate-middle-custom', { opacity: 0 });
 
 tl.to('.wrapper', { opacity: 1, duration: 2.5 });
 tl.eventCallback('onComplete', () =>
-  document.querySelector('.position-absolute').remove()
+  document.querySelector('.translate-middle-custom').remove()
 );
 
 const checkbox = document.querySelector('#theme');
