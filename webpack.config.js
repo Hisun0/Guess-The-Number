@@ -29,12 +29,16 @@ export default {
         test: /\.(ttf|png|svg)$/,
         type: 'asset/resource',
       },
+      {
+        test: /\.pug$/,
+        use: 'pug-loader',
+      },
     ],
   },
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './src/index.pug',
     }),
   ],
 
