@@ -1,18 +1,11 @@
 import onChange from 'on-change';
 import validateUserGuess from './scripts/validator.js';
 import getRandomNumber from './scripts/random-number.js';
-import {
-  renderContainer,
-  renderResult,
-  renderSecondAnimation,
-  renderThirdAnimation,
-  renderTip,
-} from './scripts/render.js';
+import { renderContainer, renderResult, renderTip } from './scripts/render.js';
 
 export default () => {
   const state = {
     uiState: {
-      animation: 'first',
       display: 'menu',
     },
     game: {
@@ -26,15 +19,6 @@ export default () => {
       },
     },
   };
-
-  const watchedAnimationState = onChange(state, () => {
-    if (state.uiState.animation === 'second') {
-      renderSecondAnimation();
-    }
-    if (state.uiState.animation === 'third') {
-      setTimeout(renderThirdAnimation, 1000);
-    }
-  });
 
   const watchedUiState = onChange(state, (path, value, previousValue) => {
     if (state.uiState.display === 'question') {

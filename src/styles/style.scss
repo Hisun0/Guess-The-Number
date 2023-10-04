@@ -40,6 +40,7 @@ h4 {
 
 p {
   font-family: Rimma-Sans;
+  font-size: 12px;
   margin: 0;
 }
 
@@ -54,6 +55,7 @@ a {
   flex-direction: column;
   min-height: 100%;
   overflow-x: hidden;
+  opacity: 0;
 }
 
 .container {
@@ -71,8 +73,8 @@ a {
 }
 
 .photo {
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
   background-position: center;
   background-size: cover;
 }
@@ -85,6 +87,10 @@ a {
 }
 .github {
   @include path-to-photo('../images/github.svg');
+}
+
+.translate-middle-custom {
+  transform: translate(-50%, -50%);
 }
 
 [data-bs-theme='light'] h1 {
