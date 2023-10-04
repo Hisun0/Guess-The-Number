@@ -23,7 +23,7 @@
       </div>
     </header>
     <main class="d-flex flex-row align-items-center mb-3">
-      <div class="container">
+      <div class="container active" data-container-name="menu">
         <div class="row">
           <div class="col">
             <div class="card bg-secondary text-white rounded-4">
@@ -31,8 +31,121 @@
               <div class="card-body text-center">
                 <button class="btn btn-primary mb-3" data-bs-target="play">play</button>
                 <button class="btn btn-primary mb-3" data-bs-target="rules">rules</button>
-                <button class="btn btn-primary mb-3" data-bs-target="settings">settings</button>
-                <input type="checkbox" name="theme" id="theme">Switch theme</input>
+                <button class="btn btn-primary" data-bs-target="settings">settings</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container" data-container-name="rules">
+        <div class="row">
+          <div class="col">
+            <div class="card bg-secondary text-white rounded-4">
+              <div class="position-relative card-header text-center">
+                <button class="position-absolute top-50 start-0 translate-middle ms-4 btn-back" data-bs-target="menu">
+                  <svg id="button-back" width="40" height="40" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.33344 18.3333L6.03707 19.6297L4.74072 18.3333L6.03707 17.037L7.33344 18.3333ZM38.5001 33C38.5001 34.0125 37.6793 34.8333 36.6668 34.8333C35.6542 34.8333 34.8334 34.0125 34.8334 33H38.5001ZM15.2037 28.7963L6.03707 19.6297L8.62981 17.037L17.7965 26.2037L15.2037 28.7963ZM6.03707 17.037L15.2037 7.8703L17.7965 10.463L8.62981 19.6297L6.03707 17.037ZM7.33344 16.5H25.6668V20.1667H7.33344V16.5ZM38.5001 29.3333V33H34.8334V29.3333H38.5001ZM25.6668 16.5C32.7544 16.5 38.5001 22.2457 38.5001 29.3333H34.8334C34.8334 24.2708 30.7293 20.1667 25.6668 20.1667V16.5Z"/>
+                  </svg>
+                </button>
+                <h2 class="h4">rules</h2>
+              </div>
+              <div class="card-body">
+                <div class="col mb-3">
+                  <p>This is a game about guessing numbers.</p>
+                  <br />
+                  <p>
+                    You need to enter a number in the required field. The game will
+                    tell you if the number you are looking for is greater or less. You have only 10 attempts, so be accurate!
+                  </p>
+                  <br />
+                  <p>
+                    if you will win 5 times in a row, you will get a secret game
+                  </p>
+                </div>
+                <div class="col d-flex flex-column align-items-center">
+                  <h3 class="h5">gl hf</h3>
+                  <svg id="heart-icon" width="117" height="100" viewBox="0 0 157 140" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M78.5 22.1894L74.5538 26.0799C75.5864 27.1788 77.0111 27.7996 78.5 27.7996C79.9889 27.7996 81.4136 27.1788 82.4462 26.0799L78.5 22.1894ZM59.7042 118.097C48.6363 109.159 36.534 100.431 26.9331 89.3566C17.5199 78.4982 10.9535 65.8287 10.9535 49.3914H0C0 69.3303 8.10923 84.5415 18.743 96.807C29.1891 108.856 42.5052 118.496 52.923 126.909L59.7042 118.097ZM10.9535 49.3914C10.9535 33.3022 19.8285 19.8098 31.943 14.1373C43.7122 8.62641 59.5261 10.0858 74.5538 26.0799L82.4462 18.2989C64.6146 -0.67883 43.9168 -3.80658 27.3893 3.93235C11.207 11.5096 0 29.1042 0 49.3914H10.9535ZM52.923 126.909C56.6635 129.929 60.679 133.15 64.7483 135.586C68.8164 138.021 73.4585 140 78.5 140V128.779C76.2392 128.779 73.579 127.877 70.2747 125.898C66.9718 123.921 63.5454 121.199 59.7042 118.097L52.923 126.909ZM104.077 126.909C114.495 118.496 127.811 108.856 138.257 96.807C148.891 84.5415 157 69.3303 157 49.3914H146.047C146.047 65.8287 139.48 78.4982 130.067 89.3566C120.466 100.431 108.364 109.159 97.2962 118.097L104.077 126.909ZM157 49.3914C157 29.1042 145.793 11.5096 129.61 3.93235C113.083 -3.80658 92.3854 -0.67883 74.5538 18.2989L82.4462 26.0799C97.4736 10.0858 113.288 8.62641 125.057 14.1373C137.171 19.8098 146.047 33.3022 146.047 49.3914H157ZM97.2962 118.097C93.4544 121.199 90.0282 123.921 86.7253 125.898C83.421 127.877 80.7608 128.779 78.5 128.779V140C83.5415 140 88.1836 138.021 92.2517 135.586C96.3213 133.15 100.336 129.929 104.077 126.909L97.2962 118.097Z"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container" data-container-name="settings">
+        <div class="row">
+          <div class="col">
+            <div class="card bg-secondary text-white rounded-4">
+              <div class="position-relative card-header text-center">
+                <button class="position-absolute top-50 start-0 translate-middle ms-4 btn-back" data-bs-target="menu">
+                  <svg id="button-back" width="40" height="40" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.33344 18.3333L6.03707 19.6297L4.74072 18.3333L6.03707 17.037L7.33344 18.3333ZM38.5001 33C38.5001 34.0125 37.6793 34.8333 36.6668 34.8333C35.6542 34.8333 34.8334 34.0125 34.8334 33H38.5001ZM15.2037 28.7963L6.03707 19.6297L8.62981 17.037L17.7965 26.2037L15.2037 28.7963ZM6.03707 17.037L15.2037 7.8703L17.7965 10.463L8.62981 19.6297L6.03707 17.037ZM7.33344 16.5H25.6668V20.1667H7.33344V16.5ZM38.5001 29.3333V33H34.8334V29.3333H38.5001ZM25.6668 16.5C32.7544 16.5 38.5001 22.2457 38.5001 29.3333H34.8334C34.8334 24.2708 30.7293 20.1667 25.6668 20.1667V16.5Z"/>
+                  </svg>
+                </button>
+                <h2 class="h4">settings</h2>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <h3 class="h6">Change language</h3>
+                    <div class="dropdown mb-3">
+                      <button class="btn btn-primary btn-block dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        language
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><button class="dropdown-item">English</button></li>
+                        <li><button class="dropdown-item">Russian</button></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <h3 class="h6">Change game theme</h3>
+                    <div class="dropdown">
+                      <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        theme
+                      </button>
+                      <ul class="dropdown-menu">
+                        <li><button class="dropdown-item" data-toggle-theme="light">Light</и></li>
+                        <li><button class="dropdown-item" data-toggle-theme="dark">Dark</button></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container" data-container-name="play">
+        <div class="row">
+          <div class="col">
+            <div class="card bg-secondary text-white rounded-4 rounded-bottom-0 mb-3">
+              <div class="position-relative card-header text-center">
+                <button class="position-absolute top-50 start-0 translate-middle ms-4 btn-back" data-bs-target="menu">
+                  <svg id="button-back" width="40" height="40" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.33344 18.3333L6.03707 19.6297L4.74072 18.3333L6.03707 17.037L7.33344 18.3333ZM38.5001 33C38.5001 34.0125 37.6793 34.8333 36.6668 34.8333C35.6542 34.8333 34.8334 34.0125 34.8334 33H38.5001ZM15.2037 28.7963L6.03707 19.6297L8.62981 17.037L17.7965 26.2037L15.2037 28.7963ZM6.03707 17.037L15.2037 7.8703L17.7965 10.463L8.62981 19.6297L6.03707 17.037ZM7.33344 16.5H25.6668V20.1667H7.33344V16.5ZM38.5001 29.3333V33H34.8334V29.3333H38.5001ZM25.6668 16.5C32.7544 16.5 38.5001 22.2457 38.5001 29.3333H34.8334C34.8334 24.2708 30.7293 20.1667 25.6668 20.1667V16.5Z"/>
+                  </svg>
+                </button>
+                <h2 class="h4">game</h2>
+              </div>
+              <div class="card-body">
+                <form class="d-flex flex-column align-items-center">
+                  <div class="w-100 mb-2">
+                    <input type="text" class="form-control text-center" placeholder="enter the number">
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-sm">try</button>
+                </form>
+              </div>
+            </div>
+            <div class="card bg-secondary text-white rounded-4 rounded-top-0">
+              <div class="card-header text-center">
+                <h2 class="h4">attempts</h2>
+              </div>
+              <div class="card-body">
+                <h3 class="h6">this is a place where will be display ypur attmepmt</h3>
               </div>
             </div>
           </div>
@@ -43,18 +156,16 @@
       <div class="container">
         <div class="row flex-row align-items-center">
           <div class="col d-flex flex-column align-items-center">
-            <div class="photo developer"></div>
-            <p class="text-center">made by <br />rodion</p>
+            <img class="photo" src="./images/my-foto.png" alt="developer-photo"></img>
+            <h3 class="text-center h6">made by <br />rodion</h3>
           </div>
           <div class="col d-flex flex-column align-items-center justify-content-between">
-            <div class="photo github">
-              <a href="https://github.com/Hisun0/Guess-The-Number"></a>
-            </div>
-            <p>github</p>
+            <a href="https://github.com/Hisun0/Guess-The-Number"><img class="photo" src="./images/github.svg" alt="github-icon"></a>
+            <h3 class="h6">github</h3>
           </div>
           <div class="col d-flex flex-column align-items-center justify-content-between">
-            <div class="photo telegram"><a href="https://t.me/d1vaaan"></a></div>
-            <p>telegram</p>
+            <a href="https://t.me/d1vaaan"><img class="photo" src="./images/telegram.svg" alt="telegram-icon"></a>
+            <h3 class="h6">telegram</h3>
           </div>
         </div>
       </div>
