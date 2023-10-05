@@ -12,8 +12,8 @@ export default () => {
     lng: 'en',
     debug: true,
     resources: {
-      ...ru,
-      ...en,
+      ru,
+      en,
     },
   });
 

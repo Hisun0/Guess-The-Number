@@ -5,13 +5,11 @@ import ruRules from './libs/ru.rules.js';
 import ruSettings from './libs/ru.settings.js';
 
 export default {
-  ru: {
-    translation: {
-      ...ruFooter,
-      ...ruMenu,
-      ...ruPlay,
-      ...ruRules,
-      ...ruSettings,
-    },
+  translation: {
+    ...ruFooter,
+    ...ruMenu,
+    ...ruPlay,
+    ...ruRules,
+    ...ruSettings,
   },
 };
