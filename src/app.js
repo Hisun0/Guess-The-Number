@@ -4,6 +4,8 @@ import ru from './locales/ru.js';
 import en from './locales/en.js';
 import watchedUiState from './view/ui-state.js';
 import watchedLanguageState from './view/language-state.js';
+import watchedValidationState from './view/validation-state.js';
+import validateUserGuess from './scripts/validator.js';
 
 export default () => {
   startAnimation();
@@ -23,14 +25,7 @@ export default () => {
       lng: 'en',
     },
     game: {
-      result: 'play',
-      isGuessLess: null,
-      userGuesses: [],
-      guessValidationError: '',
-      form: {
-        inputDisabled: false,
-        showButton: 'try',
-      },
+      validationResult: '',
     },
   };
 
@@ -61,5 +56,15 @@ export default () => {
       const language = button.dataset.toggleLanguage;
       watchedLanguageState(state).uiState.lng = language;
     });
+  });
+
+  const form = document.querySelector('form');
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const inputValue = formData.get('guess');
+    const validationResult = await validateUserGuess(inputValue);
+    watchedValidationState(state, state.uiState.lng).game.validationResult =
+      validationResult;
   });
 };
