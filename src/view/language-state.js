@@ -1,5 +1,5 @@
 import onChange from 'on-change';
-import setLanguage from '../lng.js';
+import setLanguage from '../scripts/lng.js';
 
 const watchedLanguageState = (state) =>
   onChange(state, () => {
