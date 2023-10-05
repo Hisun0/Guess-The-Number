@@ -26,19 +26,15 @@ export default {
         use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.(ttf|png|svg)$/,
+        test: /\.(ttf|png|svg|yml)$/,
         type: 'asset/resource',
-      },
-      {
-        test: /\.pug$/,
-        use: 'pug-loader',
       },
     ],
   },
 
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.pug',
+      template: './src/index.html',
     }),
   ],
 
