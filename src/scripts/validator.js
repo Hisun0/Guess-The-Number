@@ -10,15 +10,10 @@ const validateUserGuess = async (guess) => {
   });
 
   const userNumber = Number(guess);
-  if (isNaN(userNumber)) return 'errors.invalidType'; // я просто не понял как через setLocale задать ошибку для NaN
+  // if (isNaN(userNumber)) return 'errors.invalidType'; // я просто не понял как через setLocale задать ошибку для NaN
 
   const schema = number().required().integer().min(1).max(100);
-  try {
-    await schema.validate(userNumber);
-    return 'success';
-  } catch (err) {
-    return err.errors[0];
-  }
+  return await schema.validate(userNumber);
 };
 
 export default validateUserGuess;

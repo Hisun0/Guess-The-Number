@@ -3,9 +3,12 @@ import i18next from 'i18next';
 import ru from './locales/ru.js';
 import en from './locales/en.js';
 import watchedUiState from './view/ui-state.js';
-import watchedLanguageState from './view/language-state.js';
 import watchedValidationState from './view/validation-state.js';
 import validateUserGuess from './scripts/validator.js';
+import watchedAttemptsState from './view/attempts-state.js';
+import getRandomNumber from './scripts/random-number.js';
+import watchedResultState from './view/result-state.js';
+import getColorFromCssVariable from './scripts/color.js';
 
 export default () => {
   startAnimation();
@@ -23,9 +26,14 @@ export default () => {
     uiState: {
       display: 'menu',
       lng: 'en',
+      theme: 'dark',
+      headerColor: getColorFromCssVariable('dark', 'primary'),
     },
     game: {
       validationResult: '',
+      userGuesses: [],
+      randomNumber: getRandomNumber(1, 100),
+      result: '',
     },
   };
 
@@ -34,6 +42,19 @@ export default () => {
     menuButton.addEventListener('click', (event) => {
       event.preventDefault();
       const buttonName = menuButton.dataset.bsTarget;
+      const dangerColor = getColorFromCssVariable(
+        state.uiState.theme,
+        'danger'
+      );
+      const primaryColor = getColorFromCssVariable(
+        state.uiState.theme,
+        'primary'
+      );
+      if (buttonName !== 'play') {
+        watchedUiState(state).uiState.headerColor = primaryColor;
+      } else if (state.game.result === 'lose') {
+        watchedUiState(state).uiState.headerColor = dangerColor;
+      }
       watchedUiState(state).uiState.display = buttonName;
     });
   });
@@ -43,7 +64,7 @@ export default () => {
     button.addEventListener('click', (event) => {
       event.preventDefault();
       const theme = button.dataset.toggleTheme;
-      document.body.dataset.bsTheme = theme;
+      watchedUiState(state).uiState.theme = theme;
     });
   });
 
@@ -54,7 +75,7 @@ export default () => {
     button.addEventListener('click', (event) => {
       event.preventDefault();
       const language = button.dataset.toggleLanguage;
-      watchedLanguageState(state).uiState.lng = language;
+      watchedUiState(state).uiState.lng = language;
     });
   });
 
@@ -63,8 +84,25 @@ export default () => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const inputValue = formData.get('guess');
-    const validationResult = await validateUserGuess(inputValue);
-    watchedValidationState(state, state.uiState.lng).game.validationResult =
-      validationResult;
+    try {
+      const userGuess = await validateUserGuess(inputValue);
+      watchedValidationState(state, state.uiState.lng).game.validationResult =
+        'success';
+      watchedAttemptsState(state).game.userGuesses.push(userGuess);
+
+      if (state.game.userGuesses.length === 10) {
+        watchedResultState(state).game.result = 'lose';
+        const dangerColor = getColorFromCssVariable(
+          state.uiState.theme,
+          'danger'
+        );
+        watchedUiState(state).uiState.headerColor = dangerColor;
+      } else if (userGuess === state.game.randomNumber) {
+        watchedResultState(state).game.result = 'win';
+      }
+    } catch (err) {
+      watchedValidationState(state, state.uiState.lng).game.validationResult =
+        err.errors[0];
+    }
   });
 };

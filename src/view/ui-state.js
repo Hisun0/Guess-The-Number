@@ -1,20 +1,35 @@
 import onChange from 'on-change';
 import { renderContainer } from '../scripts/render.js';
+import { colorSwitch } from '../scripts/animation.js';
+import setLanguage from '../scripts/lng.js';
 
 const watchedUiState = (state) =>
   onChange(state, (path, value, previousValue) => {
-    if (state.uiState.display === 'rules') {
+    const header = document.querySelector('.header-color');
+    if (path === 'uiState.headerColor') {
+      colorSwitch(header, value, previousValue);
+    }
+    if (value === 'dark' || value === 'light') {
+      header.style.color = '';
+      document.body.dataset.bsTheme = value;
+    }
+    if (value === 'rules') {
       renderContainer(value, previousValue);
     }
-    if (state.uiState.display === 'play') {
-      console.log('qwe');
+    if (value === 'play') {
       renderContainer(value, previousValue);
     }
-    if (state.uiState.display === 'menu') {
+    if (value === 'menu') {
       renderContainer(value, previousValue);
     }
-    if (state.uiState.display === 'settings') {
+    if (value === 'settings') {
       renderContainer(value, previousValue);
+    }
+    if (value === 'ru') {
+      setLanguage('ru');
+    }
+    if (value === 'en') {
+      setLanguage('en');
     }
   });
 

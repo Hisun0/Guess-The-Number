@@ -1,5 +1,6 @@
 import onChange from 'on-change';
 import i18next from 'i18next';
+import { errorAnimation } from '../scripts/animation.js';
 
 const watchedValidationState = (state, lng) =>
   onChange(state, (path, value) => {
@@ -14,6 +15,7 @@ const watchedValidationState = (state, lng) =>
     } else {
       feedback.textContent = i18next.t(value, { lng });
       input.classList.add('is-invalid');
+      errorAnimation();
     }
   });
 
