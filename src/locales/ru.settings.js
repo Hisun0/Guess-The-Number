@@ -1,20 +1,20 @@
 export default {
   settings: {
     header: 'Настройки',
-    content: {
-      languageHeader: 'Сменить язык',
-      languageDropdown: 'Язык',
-      themeHeader: 'Сменить тему',
-      themeDropdown: 'Тема',
+    language: {
+      header: 'Сменить язык',
       dropdown: {
-        language: {
-          english: 'Английский',
-          russian: 'Русский',
-        },
-        theme: {
-          dark: 'Темная',
-          light: 'Светлая',
-        },
+        btn: 'Язык',
+        english: 'Английский',
+        russian: 'Русский',
+      },
+    },
+    theme: {
+      header: 'Сменить тему',
+      dropdown: {
+        btn: 'Тема',
+        dark: 'Темная',
+        light: 'Светлая',
       },
     },
   },

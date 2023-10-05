@@ -1,16 +1,20 @@
 export default {
   settings: {
     header: 'Settings',
-    content: {
-      languageHeader: 'Change language',
-      languageDropdown: 'Language',
-      themeHeader: 'Change theme',
-      themeDropdown: 'Theme',
+    language: {
+      header: 'Change language',
       dropdown: {
-        language: {
-          english: 'English',
-          russian: 'Russian',
-        },
+        btn: 'Language',
+        english: 'English',
+        russian: 'Russian',
+      },
+    },
+    theme: {
+      header: 'Change theme',
+      dropdown: {
+        btn: 'Theme',
+        dark: 'Dark',
+        light: 'Light',
       },
     },
   },
