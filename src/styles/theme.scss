@@ -6,7 +6,7 @@
     'secondary': #393e43,
     'success': #198753,
     'danger': #ff3444,
-    'warning': #ffffd2,
+    'warning': #ffc007,
     'info': #96a9da,
   );
 
@@ -42,10 +42,35 @@
     --bs-btn-hover-border-color: #{darken($primary, 5%)};
     --bs-btn-active-bg: #{darken($primary, 10%)};
     --bs-btn-active-border-color: #{darken($primary, 5%)};
+    border: none;
+  }
+
+  .btn-danger {
+    --bs-btn-bg: #{$danger};
+    --bs-btn-border-color: #{$danger};
+    --bs-btn-hover-bg: #{darken($danger, 5%)};
+    --bs-btn-hover-border-color: #{darken($danger, 5%)};
+    --bs-btn-active-bg: #{darken($danger, 10%)};
+    --bs-btn-active-border-color: #{darken($danger, 5%)};
+    border: none;
+  }
+
+  .btn-success {
+    --bs-btn-bg: #{$success};
+    --bs-btn-border-color: #{$success};
+    --bs-btn-hover-bg: #{darken($success, 5%)};
+    --bs-btn-hover-border-color: #{darken($success, 5%)};
+    --bs-btn-active-bg: #{darken($success, 10%)};
+    --bs-btn-active-border-color: #{darken($success, 5%)};
+    border: none;
   }
 
   .header-color {
     color: #{$primary};
+  }
+
+  .header-main-color {
+    color: white;
   }
 
   @each $color, $value in $theme-colors {
@@ -61,9 +86,9 @@
   $brand-theme-colors: (
     'primary': #266ea6,
     'secondary': #75c2ff,
-    'success': #bbfcba,
+    'success': #198753,
     'danger': #dc3545,
-    'warning': #ffffd2,
+    'warning': #fffe00,
     'info': #96a9da,
   );
 
@@ -99,10 +124,35 @@
     --bs-btn-hover-border-color: #{darken($primary, 5%)};
     --bs-btn-active-bg: #{darken($primary, 10%)};
     --bs-btn-active-border-color: #{darken($primary, 5%)};
+    border: none;
+  }
+
+  .btn-danger {
+    --bs-btn-bg: #{$danger};
+    --bs-btn-border-color: #{$danger};
+    --bs-btn-hover-bg: #{darken($danger, 5%)};
+    --bs-btn-hover-border-color: #{darken($danger, 5%)};
+    --bs-btn-active-bg: #{darken($danger, 10%)};
+    --bs-btn-active-border-color: #{darken($danger, 5%)};
+    border: none;
+  }
+
+  .btn-success {
+    --bs-btn-bg: #{$success};
+    --bs-btn-border-color: #{$success};
+    --bs-btn-hover-bg: #{darken($success, 5%)};
+    --bs-btn-hover-border-color: #{darken($success, 5%)};
+    --bs-btn-active-bg: #{darken($success, 10%)};
+    --bs-btn-active-border-color: #{darken($success, 5%)};
+    border: none;
   }
 
   .header-color {
-    color: #{$secondary};
+    color: #{$primary};
+  }
+
+  .header-main-color {
+    color: white;
   }
 
   @each $color, $value in $theme-colors {

@@ -18,7 +18,7 @@
     <header>
       <div class="row">
         <div class="col text-center px-5">
-          <h1 class="text-white">guess the <span class="header-color">number</span></h1>
+          <h1 class="header-main-color">guess the <span class="header-color">number</span></h1>
         </div>
       </div>
     </header>
@@ -122,7 +122,7 @@
       <div class="container" data-container-name="play">
         <div class="row">
           <div class="col">
-            <div class="card bg-secondary text-white rounded-4 rounded-bottom-0 mb-3">
+            <div class="card bg-secondary text-white rounded-4 rounded-bottom-0 mb-3" id="game-card">
               <div class="position-relative card-header text-center">
                 <button class="position-absolute top-50 start-0 translate-middle ms-4 btn-back" data-bs-target="menu">
                   <svg id="button-back" width="40" height="40" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
@@ -137,7 +137,8 @@
                     <p class="feedback m-0 position-absolute small text-danger"></p>
                     <input type="text" name="guess" class="form-control text-center mt-4" placeholder="enter the number">
                   </div>
-                  <button type="submit" class="btn btn-primary btn-sm w-50 mb-4" id="lng-play-guess">guess</button>
+                  <button type="submit" class="btn btn-primary btn-sm w-50 mb-4 active-button" id="lng-play-guess" data-submit-button="guess">guess</button>
+                  <button type="submit" class="btn btn-primary btn-sm w-50 mb-4" id="lng-play-restart" data-submit-button="restart">restart</button>
                 </form>
               </div>
             </div>

@@ -3,7 +3,7 @@ import enMenu from './libs/en.menu.js';
 import enPlay from './libs/en.play.js';
 import enRules from './libs/en.rules.js';
 import enSettings from './libs/en.settings.js';
-import enErrors from './libs/en.errors.js';
+import enWarning from './libs/en.warning.js';
 
 export default {
   translation: {
@@ -12,6 +12,6 @@ export default {
     ...enPlay,
     ...enRules,
     ...enSettings,
-    ...enErrors,
+    ...enWarning,
   },
 };

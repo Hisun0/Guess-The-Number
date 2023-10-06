@@ -110,14 +110,26 @@ main > .container {
   display: none;
 }
 
+[type='submit'] {
+  display: none;
+}
+
 .active {
   display: block !important;
 }
 
-[data-bs-theme='light'] h1 {
+.active-button {
+  display: block !important;
+}
+
+[data-bs-theme='light'] .header-main-color {
   text-shadow: 1.41px 1.41px $color-blue, 2px 0 $color-blue,
     1.41px -1.41px $color-blue, 0 -2px $color-blue, -1.41px -1.41px $color-blue,
     -2px 0 $color-blue, -1.41px 1.41px $color-blue, 0 2px $color-blue;
+}
+
+[data-bs-theme='light'] .header-color {
+  text-shadow: none;
 }
 
 // string.unquote(map.get($theme-colors, 'color-blue', 'dark'))

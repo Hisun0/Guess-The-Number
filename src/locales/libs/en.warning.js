@@ -5,4 +5,8 @@ export default {
     invalidType: 'Value should be a number',
     notAnInteger: 'Value should be an integer',
   },
+  warnings: {
+    less: 'Your answer is less than the number',
+    greater: 'Your answer is greater than the number',
+  },
 };
