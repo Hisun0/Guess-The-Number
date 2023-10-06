@@ -9,6 +9,7 @@ import watchedAttemptsState from './view/attempts-state.js';
 import getRandomNumber from './scripts/random-number.js';
 import watchedResultState from './view/result-state.js';
 import getColorFromCssVariable from './scripts/color.js';
+import startGame from './scripts/game.js';
 
 export default () => {
   startAnimation();
@@ -105,27 +106,7 @@ export default () => {
         const userGuess = await validateUserGuess(inputValue);
         watchedValidationState(state).game.validationResult = 'success';
         watchedAttemptsState(state).game.userGuesses.push(userGuess);
-
-        if (state.game.userGuesses.length === 10) {
-          watchedResultState(state).game.result = 'lose';
-          const dangerColor = getColorFromCssVariable(
-            state.uiState.theme,
-            'danger'
-          );
-          watchedUiState(state).uiState.headerColor = dangerColor;
-        } else if (userGuess === state.game.randomNumber) {
-          watchedResultState(state).game.result = 'win';
-          const successColor = getColorFromCssVariable(
-            state.uiState.theme,
-            'success'
-          );
-          watchedUiState(state).uiState.headerColor = successColor;
-        } else if (userGuess < state.game.randomNumber) {
-          watchedValidationState(state).game.validationResult = 'warnings.less';
-        } else if (userGuess > state.game.randomNumber) {
-          watchedValidationState(state).game.validationResult =
-            'warnings.greater';
-        }
+        startGame(state, userGuess);
       } catch (err) {
         watchedValidationState(state, state.uiState.lng).game.validationResult =
           err.errors[0];
