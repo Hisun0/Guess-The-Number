@@ -8,7 +8,7 @@ import {
 import getColorFromCssVariable from '../scripts/color.js';
 
 const watchedResultState = (state) =>
-  onChange(state, (path, value) => {
+  onChange(state, (path, value, previousValue) => {
     const guessButton = document.querySelector('#lng-play-guess');
     const restartButton = document.querySelector('#lng-play-restart');
     const input = document.querySelector('.form-control');
@@ -37,6 +37,21 @@ const watchedResultState = (state) =>
       input.setAttribute('placeholder', 'congratulations');
       input.value = '';
       winAnimation();
+    }
+    if (value === 'restart') {
+      input.removeAttribute('disabled');
+      input.setAttribute('placeholder', 'enter the number');
+      guessButton.classList.add('active-button');
+      restartButton.classList.remove('active-button');
+
+      if (previousValue === 'lose') {
+        svgColorSwitch(backButton, primaryColor, dangerColor);
+        backgroundColorSwitch(restartButton, primaryColor, dangerColor);
+      }
+      if (previousValue === 'win') {
+        svgColorSwitch(backButton, primaryColor, successColor);
+        backgroundColorSwitch(restartButton, primaryColor, successColor);
+      }
     }
   });
 
