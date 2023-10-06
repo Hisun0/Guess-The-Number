@@ -110,7 +110,15 @@ main > .container {
   display: none;
 }
 
+[type='submit'] {
+  display: none;
+}
+
 .active {
+  display: block !important;
+}
+
+.active-button {
   display: block !important;
 }
 

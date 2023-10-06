@@ -50,10 +50,16 @@ export default () => {
         state.uiState.theme,
         'primary'
       );
+      const successColor = getColorFromCssVariable(
+        state.uiState.theme,
+        'success'
+      );
       if (buttonName !== 'play') {
         watchedUiState(state).uiState.headerColor = primaryColor;
       } else if (state.game.result === 'lose') {
-        watchedUiState(state).uiState.headerColor = dangerColor;
+        watchedUiState(state).uiState.headerColor = dangerColor; // это условие нужно для запоминания цвета хедера
+      } else if (state.game.result === 'win') {
+        watchedUiState(state).uiState.headerColor = successColor;
       }
       watchedUiState(state).uiState.display = buttonName;
     });
@@ -78,7 +84,7 @@ export default () => {
       watchedUiState(state).uiState.lng = language;
     });
   });
-
+  console.log(state.game.randomNumber);
   const form = document.querySelector('form');
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -99,6 +105,11 @@ export default () => {
         watchedUiState(state).uiState.headerColor = dangerColor;
       } else if (userGuess === state.game.randomNumber) {
         watchedResultState(state).game.result = 'win';
+        const successColor = getColorFromCssVariable(
+          state.uiState.theme,
+          'success'
+        );
+        watchedUiState(state).uiState.headerColor = successColor;
       }
     } catch (err) {
       watchedValidationState(state, state.uiState.lng).game.validationResult =

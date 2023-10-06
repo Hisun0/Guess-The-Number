@@ -1,5 +1,7 @@
 import { gsap } from 'gsap';
 
+const gameCard = document.querySelector('#game-card');
+
 const rotateAnimation = (
   element,
   rotateValue = 2,
@@ -14,8 +16,12 @@ const rotateAnimation = (
 };
 
 export const errorAnimation = () => {
-  const gameCard = document.querySelector('#game-card');
   rotateAnimation(gameCard);
+};
+
+export const winAnimation = () => {
+  const tl = gsap.timeline();
+  tl.to(gameCard, { scale: 1.1 }).to(gameCard, { scale: 1 });
 };
 
 export const colorSwitch = (element, nextColor, previousColor) => {

@@ -8,7 +8,7 @@ const getColorFromCssVariable = (theme, color) => {
     light: {
       primary: '#266ea6',
       danger: '#dc3545',
-      success: '#bbfcba',
+      success: '#198753',
     },
   };
   return colors[theme][color];
