@@ -10,6 +10,7 @@ import getRandomNumber from './scripts/random-number.js';
 import watchedResultState from './view/result-state.js';
 import getColorFromCssVariable from './scripts/color.js';
 import startGame from './scripts/game.js';
+import setLanguage from './scripts/lng.js';
 
 export default () => {
   startAnimation();
@@ -26,7 +27,7 @@ export default () => {
   const state = {
     uiState: {
       display: 'menu',
-      lng: 'en',
+      lng: navigator.language,
       theme: 'dark',
       headerColor: getColorFromCssVariable('dark', 'primary'),
     },
@@ -37,6 +38,8 @@ export default () => {
       result: '',
     },
   };
+
+  setLanguage(state.uiState.lng);
 
   const menuButtons = document.querySelectorAll('[data-bs-target]');
   menuButtons.forEach((menuButton) => {
