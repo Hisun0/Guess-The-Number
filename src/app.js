@@ -1,6 +1,5 @@
 import i18next from 'i18next';
 import { startAnimation } from './scripts/animation.js';
-import i18next from 'i18next';
 import resources from './locales/index.js';
 import watchedUiState from './view/ui-state.js';
 import watchedValidationState from './view/validation-state.js';
