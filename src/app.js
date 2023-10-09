@@ -1,7 +1,6 @@
 import { startAnimation } from './scripts/animation.js';
 import i18next from 'i18next';
-import ru from './locales/ru.js';
-import en from './locales/en.js';
+import resources from './locales/index.js';
 import watchedUiState from './view/ui-state.js';
 import watchedValidationState from './view/validation-state.js';
 import validateUserGuess from './scripts/validator.js';
@@ -18,10 +17,7 @@ export default () => {
   i18next.init({
     lng: 'en',
     debug: true,
-    resources: {
-      ru,
-      en,
-    },
+    resources,
   });
 
   const state = {
