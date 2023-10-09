@@ -5,25 +5,21 @@ export const renderContainer = (value, previousValue) => {
   const tl2 = gsap.timeline();
 
   const previousContainer = document.querySelector(
-    `[data-container-name="${previousValue}"]`
+    `[data-container-name="${previousValue}"]`,
   );
 
   tl.from(previousContainer, { rotateY: 10, rotateX: 10, duration: 0.2 })
     .to(previousContainer, { opacity: 0, duration: 0.3 })
-    .eventCallback('onComplete', () =>
-      previousContainer.classList.remove('active')
-    );
+    .eventCallback('onComplete', () => previousContainer.classList.remove('active'));
 
   const currentContainer = document.querySelector(
-    `[data-container-name="${value}"]`
+    `[data-container-name="${value}"]`,
   );
 
   tl2
     .from(currentContainer, { rotateY: 10, rotateX: 10, duration: 0.2 })
     .to(currentContainer, { opacity: 1, duration: 0.3 })
-    .eventCallback('onComplete', () =>
-      currentContainer.classList.add('active')
-    );
+    .eventCallback('onComplete', () => currentContainer.classList.add('active'));
 };
 
 export const renderResult = (resultColor) => {

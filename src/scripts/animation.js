@@ -6,7 +6,7 @@ const rotateAnimation = (
   element,
   rotateValue = 2,
   duration = 0.1,
-  params = {}
+  params = {},
 ) => {
   const tl = gsap.timeline({ defaults: { duration }, ...params });
   tl.to(element, { rotate: rotateValue })
@@ -26,15 +26,15 @@ export const winAnimation = () => {
 
 export const colorSwitch = (element, nextColor, previousColor) => {
   if (
-    (nextColor === '#00aaff' || nextColor === '#266ea6') &&
-    (previousColor === '#00aaff' || previousColor === '#266ea6')
+    (nextColor === '#00aaff' || nextColor === '#266ea6')
+    && (previousColor === '#00aaff' || previousColor === '#266ea6')
   ) {
-    return; // если у вас возникли вопросы по этой части кода, то вы хороший программист. эта часть кода фиксит баг с ненужной анимацией при смене темы
-  }
+    return; // если у вас возникли вопросы по этой части кода, то вы хороший программист.
+  } // эта часть кода фиксит баг с ненужной анимацией при смене темы
   gsap.fromTo(
     element,
     { color: previousColor },
-    { color: nextColor, duration: 0.8 }
+    { color: nextColor, duration: 0.8 },
   );
 };
 
@@ -42,7 +42,7 @@ export const backgroundColorSwitch = (element, nextColor, previousColor) => {
   gsap.fromTo(
     element,
     { backgroundColor: previousColor },
-    { backgroundColor: nextColor, duration: 0.4 }
+    { backgroundColor: nextColor, duration: 0.4 },
   );
 };
 
@@ -50,7 +50,7 @@ export const svgColorSwitch = (element, nextColor, previousColor) => {
   gsap.fromTo(
     element,
     { fill: previousColor },
-    { fill: nextColor, duration: 0.8 }
+    { fill: nextColor, duration: 0.8 },
   );
 };
 
@@ -79,13 +79,9 @@ export const startAnimation = () => {
     })
     .to('.translate-middle-custom', { opacity: 0 })
     .to('.wrapper', { opacity: 1, duration: 2.5 })
-    .add(() =>
-      rotateAnimation('[data-bs-target="play"]', 2, 0.1, {
-        repeat: -1,
-        repeatDelay: 20,
-      })
-    )
-    .eventCallback('onComplete', () =>
-      document.querySelector('.translate-middle-custom').remove()
-    );
+    .add(() => rotateAnimation('[data-bs-target="play"]', 2, 0.1, {
+      repeat: -1,
+      repeatDelay: 20,
+    }))
+    .eventCallback('onComplete', () => document.querySelector('.translate-middle-custom').remove());
 };
