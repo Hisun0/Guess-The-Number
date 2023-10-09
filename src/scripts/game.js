@@ -12,12 +12,12 @@ export default (state, userGuess) => {
     watchedResultState(state).game.result = 'win';
     const successColor = getColorFromCssVariable(
       state.uiState.theme,
-      'success',
+      'success'
     );
     watchedUiState(state).uiState.headerColor = successColor;
   } else if (userGuess < state.game.randomNumber) {
-    watchedValidationState(state).game.validationResult = 'warnings.less';
-  } else if (userGuess > state.game.randomNumber) {
     watchedValidationState(state).game.validationResult = 'warnings.greater';
+  } else if (userGuess > state.game.randomNumber) {
+    watchedValidationState(state).game.validationResult = 'warnings.less';
   }
 };

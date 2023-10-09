@@ -105,6 +105,7 @@ export default () => {
       try {
         const userGuess = await validateUserGuess(inputValue);
         watchedValidationState(state).game.validationResult = 'success';
+        console.log(userGuess);
         watchedAttemptsState(state).game.userGuesses.push(userGuess);
         startGame(state, userGuess);
       } catch (err) {

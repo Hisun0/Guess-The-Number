@@ -50,5 +50,15 @@ export default {
     footer: {
       developer: 'Made by Rodion',
     },
+    errors: {
+      min: 'Number should be equal or more than 1',
+      max: 'Number should be equal or less than 100',
+      invalidType: 'Value should be a number',
+      notAnInteger: 'Value should be an integer',
+    },
+    warnings: {
+      less: 'Wrong! Try a smaller number',
+      greater: 'Wrong! Try a bigger number',
+    },
   },
 };
