@@ -29,8 +29,8 @@ export const colorSwitch = (element, nextColor, previousColor) => {
     (nextColor === '#00aaff' || nextColor === '#266ea6')
     && (previousColor === '#00aaff' || previousColor === '#266ea6')
   ) {
-    return; // если у вас возникли вопросы по этой части кода, то вы хороший программист. эта часть кода фиксит баг с ненужной анимацией при смене темы
-  }
+    return; // если у вас возникли вопросы по этой части кода, то вы хороший программист.
+  } // эта часть кода фиксит баг с ненужной анимацией при смене темы
   gsap.fromTo(
     element,
     { color: previousColor },

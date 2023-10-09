@@ -89,7 +89,7 @@ export default () => {
       watchedUiState(state).uiState.lng = language;
     });
   });
-  console.log(state.game.randomNumber);
+
   const form = document.querySelector('form');
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
