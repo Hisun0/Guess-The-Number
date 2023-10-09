@@ -12,7 +12,7 @@ export default {
   header: document.querySelector('header'),
   feedback: document.querySelector('.feedback'),
   thirdAnimationElement: document.querySelector(
-    '[data-animation-target="third"]'
+    '[data-animation-target="third"]',
   ),
   translateMiddleCustom: document.querySelector('.translate-middle-custom'),
 };

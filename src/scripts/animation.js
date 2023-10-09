@@ -5,7 +5,7 @@ const rotateAnimation = (
   element,
   rotateValue = 2,
   duration = 0.1,
-  params = {}
+  params = {},
 ) => {
   const tl = gsap.timeline({ defaults: { duration }, ...params });
   tl.to(element, { rotate: rotateValue })
@@ -25,15 +25,15 @@ export const winAnimation = () => {
 
 export const headerColorSwitch = (element, nextColor, previousColor) => {
   if (
-    (nextColor === '#00aaff' || nextColor === '#266ea6') &&
-    (previousColor === '#00aaff' || previousColor === '#266ea6')
+    (nextColor === '#00aaff' || nextColor === '#266ea6')
+    && (previousColor === '#00aaff' || previousColor === '#266ea6')
   ) {
     return; // если у вас возникли вопросы по этой части кода, то вы хороший программист.
   } // эта часть кода фиксит баг с ненужной анимацией при смене темы
   gsap.fromTo(
     element,
     { color: previousColor },
-    { color: nextColor, duration: 0.8 }
+    { color: nextColor, duration: 0.8 },
   );
 };
 
@@ -52,18 +52,17 @@ export const colorSwitch = (
   action,
   duration,
   nextColor,
-  previousColor
+  previousColor,
 ) => {
   gsap.fromTo(
     element,
     { [action]: previousColor },
-    { [action]: nextColor, duration }
+    { [action]: nextColor, duration },
   );
 };
 
 export const startAnimation = () => {
-  const position =
-    elements.thirdAnimationElement.getBoundingClientRect().bottom;
+  const position = elements.thirdAnimationElement.getBoundingClientRect().bottom;
   const headerPosition = elements.header.getBoundingClientRect().bottom;
 
   const tl = gsap.timeline();
@@ -84,11 +83,9 @@ export const startAnimation = () => {
     })
     .to('.translate-middle-custom', { opacity: 0 })
     .to('.wrapper', { opacity: 1, duration: 2.5 })
-    .add(() =>
-      rotateAnimation('[data-bs-target="play"]', 2, 0.1, {
-        repeat: -1,
-        repeatDelay: 20,
-      })
-    )
+    .add(() => rotateAnimation('[data-bs-target="play"]', 2, 0.1, {
+      repeat: -1,
+      repeatDelay: 20,
+    }))
     .eventCallback('onComplete', () => elements.translateMiddleCustom.remove());
 };
