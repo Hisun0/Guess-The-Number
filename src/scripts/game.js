@@ -12,7 +12,7 @@ export default (state, userGuess) => {
     watchedResultState(state).game.result = 'win';
     const successColor = getColorFromCssVariable(
       state.uiState.theme,
-      'success'
+      'success',
     );
     watchedUiState(state).uiState.headerColor = successColor;
   } else if (userGuess < state.game.randomNumber) {

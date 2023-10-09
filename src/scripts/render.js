@@ -1,25 +1,15 @@
-import { gsap } from 'gsap';
+import { switchContainerAnimation } from './animation.js';
 
 export const renderContainer = (value, previousValue) => {
-  const tl = gsap.timeline();
-  const tl2 = gsap.timeline();
-
   const previousContainer = document.querySelector(
     `[data-container-name="${previousValue}"]`,
   );
-
-  tl.from(previousContainer, { rotateY: 10, rotateX: 10, duration: 0.2 })
-    .to(previousContainer, { opacity: 0, duration: 0.3 })
-    .eventCallback('onComplete', () => previousContainer.classList.remove('active'));
+  switchContainerAnimation(previousContainer, 0, 'remove');
 
   const currentContainer = document.querySelector(
     `[data-container-name="${value}"]`,
   );
-
-  tl2
-    .from(currentContainer, { rotateY: 10, rotateX: 10, duration: 0.2 })
-    .to(currentContainer, { opacity: 1, duration: 0.3 })
-    .eventCallback('onComplete', () => currentContainer.classList.add('active'));
+  switchContainerAnimation(currentContainer, 1, 'add');
 };
 
 export const renderResult = (resultColor) => {

@@ -38,6 +38,16 @@ export const colorSwitch = (element, nextColor, previousColor) => {
   );
 };
 
+export const switchContainerAnimation = (container, opacity, classMove) => {
+  const tl = gsap.timeline();
+  tl.from(container, { rotateY: 10, rotateX: 10, duration: 0.2 })
+    .to(container, { opacity, duration: 0.3 })
+    .eventCallback('onComplete', () => {
+      if (classMove === 'add') container.classList.add('active');
+      else container.classList.remove('active');
+    });
+};
+
 export const backgroundColorSwitch = (element, nextColor, previousColor) => {
   gsap.fromTo(
     element,

@@ -44,15 +44,15 @@ export default () => {
       const buttonName = menuButton.dataset.bsTarget;
       const dangerColor = getColorFromCssVariable(
         state.uiState.theme,
-        'danger'
+        'danger',
       );
       const primaryColor = getColorFromCssVariable(
         state.uiState.theme,
-        'primary'
+        'primary',
       );
       const successColor = getColorFromCssVariable(
         state.uiState.theme,
-        'success'
+        'success',
       );
       if (buttonName !== 'play') {
         // это условие нужно для запоминания цвета хедера
@@ -76,7 +76,7 @@ export default () => {
   });
 
   const languageSwitchButtons = document.querySelectorAll(
-    '[data-toggle-language]'
+    '[data-toggle-language]',
   );
   languageSwitchButtons.forEach((button) => {
     button.addEventListener('click', (event) => {
@@ -92,7 +92,7 @@ export default () => {
     if (state.game.result !== '') {
       const primaryColor = getColorFromCssVariable(
         state.uiState.theme,
-        'primary'
+        'primary',
       );
       watchedResultState(state).game.result = 'restart';
       watchedUiState(state).uiState.headerColor = primaryColor;
@@ -109,8 +109,7 @@ export default () => {
         watchedAttemptsState(state).game.userGuesses.push(userGuess);
         startGame(state, userGuess);
       } catch (err) {
-        watchedValidationState(state, state.uiState.lng).game.validationResult =
-          err.errors[0];
+        watchedValidationState(state, state.uiState.lng).game.validationResult = err.errors[0];
       }
     }
   });

@@ -1,6 +1,6 @@
 import { setLocale, number } from 'yup';
 
-const validateUserGuess = async (guess) => {
+const validateUserGuess = (guess) => {
   setLocale({
     number: {
       min: 'errors.min',
@@ -16,7 +16,13 @@ const validateUserGuess = async (guess) => {
     .integer()
     .min(1)
     .max(100);
-  return await schema.validate(userNumber);
+
+  return new Promise((resolve, reject) => {
+    schema
+      .validate(userNumber)
+      .then((userGuess) => resolve(userGuess))
+      .catch((err) => reject(err));
+  });
 };
 
 export default validateUserGuess;
