@@ -10,6 +10,7 @@ import watchedResultState from './view/result-state.js';
 import getColorFromCssVariable from './scripts/color.js';
 import startGame from './scripts/game.js';
 import setLanguage from './scripts/lng.js';
+import elements from './elements.js';
 
 export default () => {
   startAnimation();
@@ -37,8 +38,7 @@ export default () => {
 
   setLanguage(state.uiState.lng);
 
-  const menuButtons = document.querySelectorAll('[data-bs-target]');
-  menuButtons.forEach((menuButton) => {
+  elements.menuButtons.forEach((menuButton) => {
     menuButton.addEventListener('click', (event) => {
       event.preventDefault();
       const buttonName = menuButton.dataset.bsTarget;
@@ -82,8 +82,7 @@ export default () => {
   switchButton('theme', 'toggleTheme');
   switchButton('language', 'toggleLanguage');
 
-  const form = document.querySelector('form');
-  form.addEventListener('submit', async (event) => {
+  elements.form.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (state.game.result !== '') {
       const primaryColor = getColorFromCssVariable(
@@ -101,7 +100,6 @@ export default () => {
       try {
         const userGuess = await validateUserGuess(inputValue);
         watchedValidationState(state).game.validationResult = 'success';
-        console.log(userGuess);
         watchedAttemptsState(state).game.userGuesses.push(userGuess);
         startGame(state, userGuess);
       } catch (err) {
