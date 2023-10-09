@@ -7,6 +7,30 @@ import {
 import getColorFromCssVariable from '../scripts/color.js';
 import elements from '../elements.js';
 
+const setResultStyles = (
+  nextColor,
+  previousColor,
+  placeholderMessage,
+  isDisabled,
+) => {
+  if (!isDisabled) {
+    elements.input.removeAttribute('disabled');
+  } else {
+    elements.input.setAttribute('disabled', '');
+  }
+  elements.input.setAttribute('placeholder', placeholderMessage);
+  elements.input.value = '';
+
+  colorSwitch(elements.backButton, 'fill', 0.8, nextColor, previousColor);
+  colorSwitch(
+    elements.restartButton,
+    'backgroundColor',
+    0.4,
+    nextColor,
+    previousColor,
+  );
+};
+
 const watchedResultState = (state) => onChange(state, (path, value, previousValue) => {
   const currentTheme = document.body.dataset.bsTheme;
   const dangerColor = getColorFromCssVariable(currentTheme, 'danger');
@@ -16,65 +40,24 @@ const watchedResultState = (state) => onChange(state, (path, value, previousValu
   elements.guessButton.classList.remove('active-button');
   elements.restartButton.classList.add('active-button');
 
-  const setResultStyles = (resultColor, placeholderMessage) => {
-    colorSwitch(elements.backButton, 'fill', 0.8, resultColor, primaryColor);
-    colorSwitch(
-      elements.restartButton,
-      'backgroundColor',
-      0.4,
-      resultColor,
-      primaryColor,
-    );
-    elements.input.setAttribute('disabled', '');
-    elements.input.setAttribute('placeholder', placeholderMessage);
-    elements.input.value = '';
-  };
-
   if (value === 'lose') {
-    setResultStyles(dangerColor, 'first time?');
+    setResultStyles(dangerColor, primaryColor, 'first time?', true);
     errorAnimation();
   }
   if (value === 'win') {
-    setResultStyles(successColor, 'congratulations');
+    setResultStyles(successColor, primaryColor, 'congratulations', true);
     winAnimation();
   }
   if (value === 'restart') {
     elements.input.removeAttribute('disabled');
-    elements.input.setAttribute('placeholder', 'enter the number');
     elements.guessButton.classList.add('active-button');
     elements.restartButton.classList.remove('active-button');
 
     if (previousValue === 'lose') {
-      colorSwitch(
-        elements.backButton,
-        'fill',
-        0.8,
-        primaryColor,
-        dangerColor,
-      );
-      colorSwitch(
-        elements.restartButton,
-        'backgroundColor',
-        0.4,
-        primaryColor,
-        dangerColor,
-      );
+      setResultStyles(primaryColor, dangerColor, 'enter the number', false);
     }
     if (previousValue === 'win') {
-      colorSwitch(
-        elements.backButton,
-        'fill',
-        0.8,
-        primaryColor,
-        successColor,
-      );
-      colorSwitch(
-        elements.restartButton,
-        'backgroundColor',
-        0.4,
-        primaryColor,
-        successColor,
-      );
+      setResultStyles(primaryColor, successColor, 'enter the number', false);
     }
   }
 });

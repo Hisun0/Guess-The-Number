@@ -8,7 +8,7 @@ export default {
   input: document.querySelector('.form-control'),
   gameCard: document.querySelector('#game-card'),
   backButton: document.querySelector('#game-card #button-back'),
-  headerSpan: document.querySelector('.header-color'),
+  headerSpan: document.querySelector('.wrapper .header-color'),
   header: document.querySelector('header'),
   feedback: document.querySelector('.feedback'),
   thirdAnimationElement: document.querySelector(
