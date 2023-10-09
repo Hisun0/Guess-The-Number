@@ -1,8 +1,7 @@
 import onChange from 'on-change';
 import {
-  backgroundColorSwitch,
   errorAnimation,
-  svgColorSwitch,
+  colorSwitch,
   winAnimation,
 } from '../scripts/animation.js';
 import getColorFromCssVariable from '../scripts/color.js';
@@ -22,8 +21,14 @@ const watchedResultState = (state) => onChange(state, (path, value, previousValu
   restartButton.classList.add('active-button');
 
   const setResultStyles = (resultColor, placeholderMessage) => {
-    svgColorSwitch(backButton, resultColor, primaryColor);
-    backgroundColorSwitch(restartButton, resultColor, primaryColor);
+    colorSwitch(backButton, 'fill', 0.8, resultColor, primaryColor);
+    colorSwitch(
+      restartButton,
+      'backgroundColor',
+      0.4,
+      resultColor,
+      primaryColor,
+    );
     input.setAttribute('disabled', '');
     input.setAttribute('placeholder', placeholderMessage);
     input.value = '';
@@ -44,12 +49,24 @@ const watchedResultState = (state) => onChange(state, (path, value, previousValu
     restartButton.classList.remove('active-button');
 
     if (previousValue === 'lose') {
-      svgColorSwitch(backButton, primaryColor, dangerColor);
-      backgroundColorSwitch(restartButton, primaryColor, dangerColor);
+      colorSwitch(backButton, 'fill', 0.8, primaryColor, dangerColor);
+      colorSwitch(
+        restartButton,
+        'backgroundColor',
+        0.4,
+        primaryColor,
+        dangerColor,
+      );
     }
     if (previousValue === 'win') {
-      svgColorSwitch(backButton, primaryColor, successColor);
-      backgroundColorSwitch(restartButton, primaryColor, successColor);
+      colorSwitch(backButton, 'fill', 0.8, primaryColor, successColor);
+      colorSwitch(
+        restartButton,
+        'backgroundColor',
+        0.4,
+        primaryColor,
+        successColor,
+      );
     }
   }
 });

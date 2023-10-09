@@ -24,7 +24,7 @@ export const winAnimation = () => {
   tl.to(gameCard, { scale: 1.1 }).to(gameCard, { scale: 1 });
 };
 
-export const colorSwitch = (element, nextColor, previousColor) => {
+export const headerColorSwitch = (element, nextColor, previousColor) => {
   if (
     (nextColor === '#00aaff' || nextColor === '#266ea6')
     && (previousColor === '#00aaff' || previousColor === '#266ea6')
@@ -48,19 +48,17 @@ export const switchContainerAnimation = (container, opacity, classMove) => {
     });
 };
 
-export const backgroundColorSwitch = (element, nextColor, previousColor) => {
+export const colorSwitch = (
+  element,
+  action,
+  duration,
+  nextColor,
+  previousColor,
+) => {
   gsap.fromTo(
     element,
-    { backgroundColor: previousColor },
-    { backgroundColor: nextColor, duration: 0.4 },
-  );
-};
-
-export const svgColorSwitch = (element, nextColor, previousColor) => {
-  gsap.fromTo(
-    element,
-    { fill: previousColor },
-    { fill: nextColor, duration: 0.8 },
+    { [action]: previousColor },
+    { [action]: nextColor, duration },
   );
 };
 
