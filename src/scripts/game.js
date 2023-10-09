@@ -4,17 +4,16 @@ import watchedValidationState from '../view/validation-state.js';
 import getColorFromCssVariable from './color.js';
 
 export default (state, userGuess) => {
+  const setGameResult = (result, resultColor) => {
+    watchedResultState(state).game.result = result;
+    const color = getColorFromCssVariable(state.uiState.theme, resultColor);
+    watchedUiState(state).uiState.headerColor = color;
+  };
+
   if (state.game.userGuesses.length === 10) {
-    watchedResultState(state).game.result = 'lose';
-    const dangerColor = getColorFromCssVariable(state.uiState.theme, 'danger');
-    watchedUiState(state).uiState.headerColor = dangerColor;
+    setGameResult('lose', 'danger');
   } else if (userGuess === state.game.randomNumber) {
-    watchedResultState(state).game.result = 'win';
-    const successColor = getColorFromCssVariable(
-      state.uiState.theme,
-      'success',
-    );
-    watchedUiState(state).uiState.headerColor = successColor;
+    setGameResult('win', 'success');
   } else if (userGuess < state.game.randomNumber) {
     watchedValidationState(state).game.validationResult = 'warnings.greater';
   } else if (userGuess > state.game.randomNumber) {
