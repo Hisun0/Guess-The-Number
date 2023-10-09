@@ -21,20 +21,20 @@ const watchedResultState = (state) => onChange(state, (path, value, previousValu
   guessButton.classList.remove('active-button');
   restartButton.classList.add('active-button');
 
-  if (value === 'lose') {
-    svgColorSwitch(backButton, dangerColor, primaryColor);
-    backgroundColorSwitch(restartButton, dangerColor, primaryColor);
+  const setResultStyles = (resultColor, placeholderMessage) => {
+    svgColorSwitch(backButton, resultColor, primaryColor);
+    backgroundColorSwitch(restartButton, resultColor, primaryColor);
     input.setAttribute('disabled', '');
-    input.setAttribute('placeholder', 'first time?');
+    input.setAttribute('placeholder', placeholderMessage);
     input.value = '';
+  };
+
+  if (value === 'lose') {
+    setResultStyles(dangerColor, 'first time?');
     errorAnimation();
   }
   if (value === 'win') {
-    svgColorSwitch(backButton, successColor, primaryColor);
-    backgroundColorSwitch(restartButton, successColor, primaryColor);
-    input.setAttribute('disabled', '');
-    input.setAttribute('placeholder', 'congratulations');
-    input.value = '';
+    setResultStyles(successColor, 'congratulations');
     winAnimation();
   }
   if (value === 'restart') {
