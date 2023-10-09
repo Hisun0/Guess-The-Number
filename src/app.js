@@ -1,5 +1,5 @@
-import { startAnimation } from './scripts/animation.js';
 import i18next from 'i18next';
+import { startAnimation } from './scripts/animation.js';
 import ru from './locales/ru.js';
 import en from './locales/en.js';
 import watchedUiState from './view/ui-state.js';
@@ -48,20 +48,21 @@ export default () => {
       const buttonName = menuButton.dataset.bsTarget;
       const dangerColor = getColorFromCssVariable(
         state.uiState.theme,
-        'danger'
+        'danger',
       );
       const primaryColor = getColorFromCssVariable(
         state.uiState.theme,
-        'primary'
+        'primary',
       );
       const successColor = getColorFromCssVariable(
         state.uiState.theme,
-        'success'
+        'success',
       );
       if (buttonName !== 'play') {
+        // это условие нужно для запоминания цвета хедера
         watchedUiState(state).uiState.headerColor = primaryColor;
       } else if (state.game.result === 'lose') {
-        watchedUiState(state).uiState.headerColor = dangerColor; // это условие нужно для запоминания цвета хедера
+        watchedUiState(state).uiState.headerColor = dangerColor;
       } else if (state.game.result === 'win') {
         watchedUiState(state).uiState.headerColor = successColor;
       }
@@ -79,7 +80,7 @@ export default () => {
   });
 
   const languageSwitchButtons = document.querySelectorAll(
-    '[data-toggle-language]'
+    '[data-toggle-language]',
   );
   languageSwitchButtons.forEach((button) => {
     button.addEventListener('click', (event) => {
@@ -95,7 +96,7 @@ export default () => {
     if (state.game.result !== '') {
       const primaryColor = getColorFromCssVariable(
         state.uiState.theme,
-        'primary'
+        'primary',
       );
       watchedResultState(state).game.result = 'restart';
       watchedUiState(state).uiState.headerColor = primaryColor;
@@ -111,8 +112,7 @@ export default () => {
         watchedAttemptsState(state).game.userGuesses.push(userGuess);
         startGame(state, userGuess);
       } catch (err) {
-        watchedValidationState(state, state.uiState.lng).game.validationResult =
-          err.errors[0];
+        watchedValidationState(state, state.uiState.lng).game.validationResult = err.errors[0];
       }
     }
   });
