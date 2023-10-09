@@ -66,25 +66,21 @@ export default () => {
     });
   });
 
-  const themeSwitchButtons = document.querySelectorAll('[data-toggle-theme]');
-  themeSwitchButtons.forEach((button) => {
-    button.addEventListener('click', (event) => {
-      event.preventDefault();
-      const theme = button.dataset.toggleTheme;
-      watchedUiState(state).uiState.theme = theme;
+  const switchButton = (stateParam, toggle) => {
+    const switchButtons = document.querySelectorAll(
+      `[data-toggle-${stateParam}]`,
+    );
+    switchButtons.forEach((button) => {
+      button.addEventListener('click', (event) => {
+        event.preventDefault();
+        const dataset = button.dataset[toggle];
+        watchedUiState(state).uiState[stateParam] = dataset;
+      });
     });
-  });
+  };
 
-  const languageSwitchButtons = document.querySelectorAll(
-    '[data-toggle-language]',
-  );
-  languageSwitchButtons.forEach((button) => {
-    button.addEventListener('click', (event) => {
-      event.preventDefault();
-      const language = button.dataset.toggleLanguage;
-      watchedUiState(state).uiState.lng = language;
-    });
-  });
+  switchButton('theme', 'toggleTheme');
+  switchButton('language', 'toggleLanguage');
 
   const form = document.querySelector('form');
   form.addEventListener('submit', async (event) => {
