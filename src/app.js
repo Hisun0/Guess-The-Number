@@ -1,3 +1,4 @@
+import i18next from 'i18next';
 import { startAnimation } from './scripts/animation.js';
 import i18next from 'i18next';
 import resources from './locales/index.js';
@@ -55,9 +56,10 @@ export default () => {
         'success'
       );
       if (buttonName !== 'play') {
+        // это условие нужно для запоминания цвета хедера
         watchedUiState(state).uiState.headerColor = primaryColor;
       } else if (state.game.result === 'lose') {
-        watchedUiState(state).uiState.headerColor = dangerColor; // это условие нужно для запоминания цвета хедера
+        watchedUiState(state).uiState.headerColor = dangerColor;
       } else if (state.game.result === 'win') {
         watchedUiState(state).uiState.headerColor = successColor;
       }
@@ -84,7 +86,7 @@ export default () => {
       watchedUiState(state).uiState.lng = language;
     });
   });
-  console.log(state.game.randomNumber);
+
   const form = document.querySelector('form');
   form.addEventListener('submit', async (event) => {
     event.preventDefault();

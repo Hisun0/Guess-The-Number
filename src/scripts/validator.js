@@ -16,7 +16,7 @@ const validateUserGuess = async (guess) => {
     .integer()
     .min(1)
     .max(100);
-  return await schema.validate(userNumber);
+  await schema.validate(userNumber);
 };
 
 export default validateUserGuess;
